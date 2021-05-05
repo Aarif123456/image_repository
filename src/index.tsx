@@ -1,9 +1,11 @@
+import { FunctionComponent, StrictMode } from 'react';
 import { App } from './components';
 /* Import for languages */
 import { IntlProvider } from 'react-intl';
 import messagesEn from './translations/en.json';
 /* Import website wide css */
 import './index.css';
+import ReactDOM from 'react-dom';
 
 /* For getting back data */
 const language = (navigator.languages && navigator.languages[0]) || navigator.language;

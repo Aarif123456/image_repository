@@ -1,18 +1,22 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-// import { HomePage, LoginPage } from '../components/View';
-import { HomePage } from '../components';
+// import { HomeView, LoginView } from '../components/View';
+import { HomeView } from './home';
 /* Import the pages of the website */
 import { NotFound } from '../common/errorHandling';
 /* Import to control the color scheme like dark mode */
-import { createMuiTheme, PaletteColorOptions, ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { pink, green } from '@material-ui/core/colors';
 
 const darkTheme = createMuiTheme({
     palette: {
-        primary: pink[100] as PaletteColorOptions,
-        secondary: green,
+        primary: {
+            main: pink[100]
+        },
+        secondary: {
+            main: green[500]
+        },
         type: 'dark'
     }
 });
@@ -23,16 +27,16 @@ export const App: FunctionComponent = () => (
         <BrowserRouter>
             <Switch>
                 {/*<Route path='/gallery/:id'>
-                    <GalleryPage/>
+                    <GalleryView/>
                 </Route>
                 <Route exact path='/signup'>
-                    <SignUpPage />
+                    <SignUpView />
                 </Route>
                 <Route exact path='/login'>
-                    <LoginPage />
+                    <LoginView />
                 </Route>*/}
                 <Route exact path='/'>
-                    <HomePage />
+                    <HomeView />
                 </Route>
                 <Route>
                     <NotFound />

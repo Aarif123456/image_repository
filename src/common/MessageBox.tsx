@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 
 import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
