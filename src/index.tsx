@@ -10,14 +10,13 @@ const language = (navigator.languages && navigator.languages[0]) || navigator.la
 /* Since we only have English as a language */
 const message = messagesEn;
 
-const WrappedApp : FunctionComponent = () => (
+const WrappedApp: FunctionComponent = () => (
     <StrictMode>
         <IntlProvider locale={language} messages={message}>
-            <App/>
+            <App />
         </IntlProvider>
     </StrictMode>
 );
-
 
 // Renders the application
 ReactDOM.render(<WrappedApp />, document.getElementById('root'));

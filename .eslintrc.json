@@ -1,18 +1,46 @@
 {
-    "root": true,
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-        "@typescript-eslint"
+    "ignorePatterns": [
+        "build/",
+        "dist/",
+        "node_modules/"
     ],
-    "extends": [
-        "react-app",
-        "eslint:recommended",
-        "prettier/@typescript-eslint",
-        "plugin:prettier/recommended"
-    ],
-    "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "module",
-        "project": "./tsconfig.eslint.json"
-    }
+    "overrides": [
+        {
+            "files": [
+                "**/*.ts",
+                "**/*.tsx"
+            ],
+            "parser": "@typescript-eslint/parser",
+            "extends": [
+                "react-app",
+                "eslint:recommended",
+                "plugin:@typescript-eslint/eslint-recommended",
+                "plugin:@typescript-eslint/recommended",
+                "plugin:@typescript-eslint/recommended-requiring-type-checking",
+                "prettier"
+            ],
+            "parserOptions": {
+                "ecmaVersion": 2020,
+                "sourceType": "module",
+                "project": "./tsconfig.eslint.json"
+            }
+        },
+        {
+            "files": [
+                "**/*.json"
+            ],
+            "extends": [
+                "plugin:i18n-json/recommended"
+            ],
+            "rules": {
+                "i18n-json/sorted-keys": [
+                    2,
+                    {
+                        "order": "asc",
+                        "indentSpaces": 4
+                    }
+                ]
+            }
+        }
+    ]
 }
