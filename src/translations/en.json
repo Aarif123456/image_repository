@@ -2,5 +2,7 @@
     "Error.404.errorBody": "Error 404",
     "Error.404.greeting": "Hello!",
     "Error.404.message": "Oh no it looks we lost you. Not to worry, you can continue using the search bar to get you to the right page!",
-    "Error.UNEXPECTED_DATA_FORMAT": "Internal server error: data received does not match expected data format"
+    "Error.UNEXPECTED_DATA_FORMAT": "Internal server error: data received does not match expected data format",
+    "LandingPage.LoginButton": "Login",
+    "LandingPage.SignupButton": "Sign Up"
 }
