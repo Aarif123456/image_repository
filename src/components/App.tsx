@@ -1,18 +1,17 @@
-import React, { FunctionComponent, StrictMode } from 'react';
-import ReactDOM from 'react-dom';
+import React, { FunctionComponent } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 // import { HomePage, LoginPage } from '../components/View';
 import { HomePage } from '../components';
 /* Import the pages of the website */
 import { NotFound } from '../common/errorHandling';
 /* Import to control the color scheme like dark mode */
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, PaletteColorOptions, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import {purple, green} from '@material-ui/core/colors';
+import { pink, green } from '@material-ui/core/colors';
 
 const darkTheme = createMuiTheme({
     palette: {
-        primary: pink[100],
+        primary: pink[100] as PaletteColorOptions,
         secondary: green,
         type: 'dark'
     }
@@ -42,4 +41,3 @@ export const App: FunctionComponent = () => (
         </BrowserRouter>
     </ThemeProvider>
 );
-
