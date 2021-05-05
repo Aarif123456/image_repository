@@ -1,17 +1,18 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import { Typography } from '@material-ui/core';
-import { ErrorBoundary } from '../errorHandling';
-import { MessageBox } from '../common';
-import { SearchBar, useRootPageStyles } from '../components/search';
+import { ErrorFallback } from './ErrorFallback';
+import { MessageBox } from '..';
+import { SearchBar, useRootPageStyles } from '../../components/search';
 import { FormattedMessage } from 'react-intl';
+
 export const NotFound: FunctionComponent = () => {
     const classes = useRootPageStyles();
     return (
         <div className={classes.root}>
-            <ErrorBoundary>
+            <ErrorFallback>
                 <SearchBar activeMode='transporter' />
-            </ErrorBoundary>
-            <ErrorBoundary>
+            </ErrorFallback>
+            <ErrorFallback>
                 <MessageBox type='error'>
                     <Typography variant='h5'>
                         <FormattedMessage id='Error.404.greeting' />
@@ -23,7 +24,7 @@ export const NotFound: FunctionComponent = () => {
                         <FormattedMessage id='Error.404.errorBody' />
                     </Typography>
                 </MessageBox>
-            </ErrorBoundary>
+            </ErrorFallback>
         </div>
     );
 };
