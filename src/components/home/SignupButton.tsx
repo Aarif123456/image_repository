@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import { FormattedMessage } from 'react-intl';
 
+/*TODO: use ButtonbaseProps to set props */
 export const SignUpButton: FunctionComponent = (props) => {
     const history = useHistory();
     const goToLoginPage = (): void => {
@@ -11,7 +12,7 @@ export const SignUpButton: FunctionComponent = (props) => {
     return (
         <Button onClick={goToLoginPage} {...props}>
             {' '}
-            <FormattedMessage id='LandingPage.SignupButton' />
+            <FormattedMessage id='UserManagement.signup' />
         </Button>
     );
 };

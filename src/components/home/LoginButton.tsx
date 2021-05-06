@@ -10,7 +10,7 @@ export const LoginButton: FunctionComponent = (props) => {
     };
     return (
         <Button onClick={goToLoginPage} {...props}>
-            <FormattedMessage id='LandingPage.LoginButton' />
+            <FormattedMessage id='UserManagement.login' />
         </Button>
     );
 };
