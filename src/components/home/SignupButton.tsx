@@ -6,11 +6,11 @@ import { FormattedMessage } from 'react-intl';
 /*TODO: use ButtonbaseProps to set props */
 export const SignUpButton: FunctionComponent = (props) => {
     const history = useHistory();
-    const goToLoginPage = (): void => {
+    const goToSignupPage = (): void => {
         history.push('/signup');
     };
     return (
-        <Button onClick={goToLoginPage} {...props}>
+        <Button onClick={goToSignupPage} {...props}>
             {' '}
             <FormattedMessage id='UserManagement.signup' />
         </Button>
