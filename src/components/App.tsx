@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 // import { HomeView, LoginView } from '../components/View';
 import { HomeView } from './home';
+import { SignUpView } from './register';
 /* Import the pages of the website */
 import { NotFound } from '../common/errorHandling';
 /* Import to control the color scheme like dark mode */
@@ -29,12 +30,12 @@ export const App: FunctionComponent = () => (
                 {/*<Route path='/gallery/:id'>
                     <GalleryView/>
                 </Route>
-                <Route exact path='/signup'>
-                    <SignUpView />
-                </Route>
                 <Route exact path='/login'>
                     <LoginView />
                 </Route>*/}
+                <Route exact path='/signup'>
+                    <SignUpView />
+                </Route>
                 <Route exact path='/'>
                     <HomeView />
                 </Route>
