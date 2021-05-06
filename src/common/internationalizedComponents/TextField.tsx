@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { TextField, InputBaseProps as InputProps } from '@material-ui/core';
+import { TextField as MaterialTextField, InputBaseProps as InputProps } from '@material-ui/core';
 import { useIntl } from 'react-intl';
 
 export type TextInputFieldProps = {
@@ -12,7 +12,7 @@ export type TextInputFieldProps = {
     inputProps?: InputProps;
 };
 
-export const InternationalizedTextField: FunctionComponent<TextInputFieldProps> = ({
+export const TextField: FunctionComponent<TextInputFieldProps> = ({
     id,
     name,
     autoCompleteName,
@@ -24,7 +24,7 @@ export const InternationalizedTextField: FunctionComponent<TextInputFieldProps> 
     const intl = useIntl();
     return (
         <>
-            <TextField
+            <MaterialTextField
                 id={id}
                 autoComplete={autoCompleteName}
                 name={name}

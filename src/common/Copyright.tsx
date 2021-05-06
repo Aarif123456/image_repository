@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Box, Typography } from '@material-ui/core';
 import { FormattedMessage } from 'react-intl';
-import { Link } from './Link';
+import { Link } from './internationalizedComponents';
 
 export const Copyright: FunctionComponent = () => {
     return (

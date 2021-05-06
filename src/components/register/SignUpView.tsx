@@ -1,75 +1,13 @@
 import { FunctionComponent } from 'react';
-import { useSignUpStyles } from './SignUpStyle';
-import { SignUpHeader } from './SignUpHeader';
-import { Link, InternationalizedTextField } from '../../common';
-import { Button, Grid, Container } from '@material-ui/core';
-import { ClassNameMap } from '@material-ui/core/styles/withStyles';
+/* Handle error in program */
+import { ErrorFallback } from '../../common/errorHandling';
+import { Container } from '@material-ui/core';
+import { SignUp } from './SignUp';
 
-/* Modified from https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-up */
-
-export const SignUpView: FunctionComponent = () => {
-    const classes: ClassNameMap = useSignUpStyles();
-    return (
+export const SignUpView: FunctionComponent = () => (
+    <ErrorFallback>
         <Container component='main' maxWidth='xs'>
-            <div className={classes.paper}>
-                <SignUpHeader />
-                <form className={classes.form}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6}>
-                            <InternationalizedTextField
-                                autoCompleteName='fname'
-                                name='firstName'
-                                id='firstName'
-                                labelTranslatorId='Signup.firstName'
-                                autoFocus
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <InternationalizedTextField
-                                id='lastName'
-                                labelTranslatorId='Signup.lastName'
-                                name='lastName'
-                                autoCompleteName='lname'
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <InternationalizedTextField
-                                id='email'
-                                labelTranslatorId='Signup.email'
-                                name='email'
-                                type='email'
-                                autoCompleteName='email'
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <InternationalizedTextField
-                                name='password'
-                                labelTranslatorId='Signup.password'
-                                type='password'
-                                id='password'
-                                autoCompleteName='current-password'
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <InternationalizedTextField
-                                name='password'
-                                labelTranslatorId='Signup.confirmPassword'
-                                type='password'
-                                id='confirm-password'
-                                autoCompleteName='confirm-password'
-                            />
-                        </Grid>
-                    </Grid>
-                    <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
-                        Sign Up
-                    </Button>
-                    <Grid container justify='flex-end'>
-                        <Grid item>
-                            <Link to='/login' linkProps={{ variant: 'body2' }} labelTranslatorId='Signup.alreadyRegistered' />
-                        </Grid>
-                    </Grid>
-                </form>
-            </div>
+            <SignUp />
         </Container>
-    );
-};
+    </ErrorFallback>
+);
