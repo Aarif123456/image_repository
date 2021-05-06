@@ -3,10 +3,8 @@ import { FunctionComponent } from 'react';
 import { ErrorFallback } from '../../common/errorHandling';
 import { Home } from './Home';
 
-export const HomeView: FunctionComponent = () => {
-    return (
-        <ErrorFallback>
-            <Home />
-        </ErrorFallback>
-    );
-};
+export const HomeView: FunctionComponent = () => (
+    <ErrorFallback>
+        <Home />
+    </ErrorFallback>
+);

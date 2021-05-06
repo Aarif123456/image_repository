@@ -1,10 +1,10 @@
 import { makeStyles, createStyles, StyleRules } from '@material-ui/core/styles';
-import backgroundImage  from '../../resources/space.jpg';
+import backgroundImage from '../../resources/space.jpg';
 export const useHomeStyles = makeStyles(
     (): StyleRules =>
         createStyles({
             mainGrid: {
-                minHeight: '100vh'            
+                minHeight: '100vh'
             },
             mainButtons: {
                 minWidth: '30%'
