@@ -61,7 +61,7 @@ export const SignUp: FunctionComponent = () => {
                             autoCompleteName='firstName'
                             name='firstName'
                             id='firstName'
-                            labelTranslatorId='Signup.firstName'
+                            labelTranslatorId='UserManagement.firstName'
                             autoFocus
                             helperText={formik.touched.firstName && formik.errors.firstName}
                             inputProps={{
@@ -74,7 +74,7 @@ export const SignUp: FunctionComponent = () => {
                     <Grid item xs={12} sm={6}>
                         <TextField
                             id='lastName'
-                            labelTranslatorId='Signup.lastName'
+                            labelTranslatorId='UserManagement.lastName'
                             name='lastName'
                             autoCompleteName='lname'
                             helperText={formik.touched.lastName && formik.errors.lastName}
@@ -88,7 +88,7 @@ export const SignUp: FunctionComponent = () => {
                     <Grid item xs={12}>
                         <TextField
                             id='email'
-                            labelTranslatorId='Signup.email'
+                            labelTranslatorId='UserManagement.email'
                             name='email'
                             type='email'
                             autoCompleteName='email'
@@ -103,7 +103,7 @@ export const SignUp: FunctionComponent = () => {
                     <Grid item xs={12}>
                         <TextField
                             name='password'
-                            labelTranslatorId='Signup.password'
+                            labelTranslatorId='UserManagement.password'
                             type='password'
                             id='password'
                             autoCompleteName='password'
@@ -118,7 +118,7 @@ export const SignUp: FunctionComponent = () => {
                     <Grid item xs={12}>
                         <TextField
                             name='confirmPassword'
-                            labelTranslatorId='Signup.confirmPassword'
+                            labelTranslatorId='UserManagement.confirmPassword'
                             type='password'
                             id='confirmPassword'
                             autoCompleteName='confirmPassword'
@@ -134,7 +134,7 @@ export const SignUp: FunctionComponent = () => {
                 <SubmitButton />
                 <Grid container justify='flex-end'>
                     <Grid item>
-                        <Link to='/login' linkProps={{ variant: 'body2' }} labelTranslatorId='Signup.alreadyRegistered' />
+                        <Link to='/login' linkProps={{ variant: 'body2' }} labelTranslatorId='UserManagement.alreadyRegistered' />
                     </Grid>
                 </Grid>
             </form>
