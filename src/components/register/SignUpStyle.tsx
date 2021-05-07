@@ -16,9 +16,6 @@ export const useSignUpStyles = makeStyles(
             form: {
                 width: '100%', // Fix IE 11 issue.
                 marginTop: theme.spacing(3)
-            },
-            submit: {
-                margin: theme.spacing(3, 0, 2)
             }
         })
 );
@@ -29,6 +26,15 @@ export const useSignUpHeaderStyles = makeStyles(
             avatar: {
                 margin: theme.spacing(1),
                 backgroundColor: theme.palette.secondary.main
+            }
+        })
+);
+
+export const useSignUpButtonStyles = makeStyles(
+    (theme): StyleRules =>
+        createStyles({
+            submit: {
+                margin: theme.spacing(3, 0, 2)
             }
         })
 );

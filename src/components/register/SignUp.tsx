@@ -2,32 +2,82 @@ import { FunctionComponent } from 'react';
 import { useSignUpStyles } from './SignUpStyle';
 import { SignUpHeader } from './SignUpHeader';
 import { Link, TextField } from '../../common';
-import { Button, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
+import { SubmitButton } from './SignUpSubmitButton';
+import { getValidationSchema } from './FormStructure';
+import { useFormik } from 'formik';
+import { useIntl } from 'react-intl';
+// import { Formik, FormikHelpers, FormikProps, Form, Field, FieldProps} from 'formik';
 
 /* Modified from https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-up */
 
 export const SignUp: FunctionComponent = () => {
     const classes: ClassNameMap = useSignUpStyles();
+    const intl = useIntl();
+    const validationSchema = getValidationSchema(intl);
+    const formik = useFormik({
+        initialValues: validationSchema.cast({
+            email: '',
+            password: '',
+            confirmPassword: '',
+            firstName: '',
+            lastName: ''
+        }),
+        validationSchema: validationSchema,
+        onSubmit: (values) => {
+            alert(JSON.stringify(values, null, 2));
+        }
+    });
+    /* Manage form data then pass it to the submit button */
     return (
         <div className={classes.paper}>
             <SignUpHeader />
-            <form className={classes.form}>
+            <form className={classes.form} onSubmit={formik.handleSubmit} noValidate>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                         <TextField
-                            autoCompleteName='fname'
+                            autoCompleteName='firstName'
                             name='firstName'
                             id='firstName'
                             labelTranslatorId='Signup.firstName'
                             autoFocus
+                            helperText={formik.touched.firstName && formik.errors.firstName}
+                            inputProps={{
+                                value: formik.values.firstName,
+                                onChange: formik.handleChange,
+                                error: formik.touched.firstName && Boolean(formik.errors.firstName)
+                            }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField id='lastName' labelTranslatorId='Signup.lastName' name='lastName' autoCompleteName='lname' />
+                        <TextField
+                            id='lastName'
+                            labelTranslatorId='Signup.lastName'
+                            name='lastName'
+                            autoCompleteName='lname'
+                            helperText={formik.touched.lastName && formik.errors.lastName}
+                            inputProps={{
+                                value: formik.values.lastName,
+                                onChange: formik.handleChange,
+                                error: formik.touched.lastName && Boolean(formik.errors.lastName)
+                            }}
+                        />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField id='email' labelTranslatorId='Signup.email' name='email' type='email' autoCompleteName='email' />
+                        <TextField
+                            id='email'
+                            labelTranslatorId='Signup.email'
+                            name='email'
+                            type='email'
+                            autoCompleteName='email'
+                            helperText={formik.touched.email && formik.errors.email}
+                            inputProps={{
+                                value: formik.values.email,
+                                onChange: formik.handleChange,
+                                error: formik.touched.email && Boolean(formik.errors.email)
+                            }}
+                        />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
@@ -35,22 +85,32 @@ export const SignUp: FunctionComponent = () => {
                             labelTranslatorId='Signup.password'
                             type='password'
                             id='password'
-                            autoCompleteName='current-password'
+                            autoCompleteName='password'
+                            helperText={formik.touched.password && formik.errors.password}
+                            inputProps={{
+                                value: formik.values.password,
+                                onChange: formik.handleChange,
+                                error: formik.touched.password && Boolean(formik.errors.password)
+                            }}
                         />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
-                            name='password'
+                            name='confirmPassword'
                             labelTranslatorId='Signup.confirmPassword'
                             type='password'
-                            id='confirm-password'
-                            autoCompleteName='confirm-password'
+                            id='confirmPassword'
+                            autoCompleteName='confirmPassword'
+                            helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
+                            inputProps={{
+                                value: formik.values.confirmPassword,
+                                onChange: formik.handleChange,
+                                error: formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)
+                            }}
                         />
                     </Grid>
                 </Grid>
-                <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
-                    Sign Up
-                </Button>
+                <SubmitButton />
                 <Grid container justify='flex-end'>
                     <Grid item>
                         <Link to='/login' linkProps={{ variant: 'body2' }} labelTranslatorId='Signup.alreadyRegistered' />

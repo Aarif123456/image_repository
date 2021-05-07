@@ -9,6 +9,7 @@ export type TextInputFieldProps = {
     labelTranslatorId: string;
     autoFocus?: boolean;
     type?: string;
+    helperText?: string | false;
     inputProps?: InputProps;
 };
 
@@ -19,7 +20,8 @@ export const TextField: FunctionComponent<TextInputFieldProps> = ({
     labelTranslatorId,
     inputProps,
     autoFocus,
-    type
+    type,
+    helperText
 }) => {
     const intl = useIntl();
     return (
@@ -34,6 +36,7 @@ export const TextField: FunctionComponent<TextInputFieldProps> = ({
                 label={intl.formatMessage({ id: labelTranslatorId })}
                 autoFocus={autoFocus}
                 type={type !== undefined ? type : 'text'}
+                helperText={helperText}
                 InputProps={{
                     ...inputProps
                 }}
