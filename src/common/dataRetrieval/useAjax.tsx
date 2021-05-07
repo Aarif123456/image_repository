@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
+import { AXIOS_ENDPOINT } from './apiConstants';
 
 export type ErrorType = { error: string } | undefined;
 export type AjaxType<T> = {
@@ -7,13 +8,6 @@ export type AjaxType<T> = {
     isLoading: boolean;
     data: T;
 };
-
-export const API = 'https://arif115.myweb.cs.uwindsor.ca/imagerepository/api/';
-
-export const AXIOS_ENDPOINT: AxiosInstance = axios.create({
-    withCredentials: true,
-    baseURL: API
-});
 
 export function useAjax<T, Y>(endpoint: string, isReady: boolean, args?: Y): AjaxType<T | ErrorType> {
     type ReturnType = T | ErrorType;
