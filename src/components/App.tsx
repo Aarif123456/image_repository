@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 // import { HomeView, LoginView } from '../components/View';
 import { HomeView } from './home';
+import { LoginView } from './login';
 import { SignUpView } from './register';
 /* Import the pages of the website */
 import { NotFound } from '../common/errorHandling';
@@ -30,9 +31,13 @@ export const App: FunctionComponent = () => (
                 {/*<Route path='/gallery/:id'>
                     <GalleryView/>
                 </Route>
+                <Route exact path='/forgotPassword'>
+                    <ForgotPasswordView />
+                </Route>
+                */}
                 <Route exact path='/login'>
                     <LoginView />
-                </Route>*/}
+                </Route>
                 <Route exact path='/signup'>
                     <SignUpView />
                 </Route>
