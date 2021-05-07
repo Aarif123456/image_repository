@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 import { IntlShape } from 'react-intl';
 
-interface FormValues {
+export interface FormValues {
     firstName: string;
     lastName: string;
     email: string;

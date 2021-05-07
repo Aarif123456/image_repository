@@ -4,7 +4,7 @@ import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
-type MessageBoxTypes = 'warning' | 'error';
+export type MessageBoxTypes = 'warning' | 'error';
 
 interface Props {
     className?: string;

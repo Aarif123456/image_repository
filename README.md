@@ -22,10 +22,12 @@ This is an image repository created for the [Shopify Developer Intern Challenge]
 
 ## TODO
 
+* Use PHP auth to allow users to register
+* Create function to create user attributes from info
+* Create function to create system attributes
 * Test storing file in databases and store folder structure 
 * Test deleting file
 * Test with encryption
-* Use PHP auth to allow users to register
 * Incorporating uploading with users
 * Make sure downloading works for user
 * Allow users to browse their files
