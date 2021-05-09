@@ -1,11 +1,6 @@
 import { FunctionComponent } from 'react';
-import { useAjaxComponent, SimpleErrorMessage } from '../../common/dataRetrieval';
-import { Link, TextField } from '../../common';
-import { FormValues, getValidationSchema } from './FormStructure';
-import { useSignUpStyles } from './SignUpStyle';
-import { SignUpHeader } from './SignUpHeader';
-import { SignupApiReturn, SignupMessage } from './SignupMessage';
-import { SubmitButton } from './SignUpSubmitButton';
+import { useAjaxComponent, SimpleErrorMessage, Link, TextField } from '../../common';
+import { FormValues, getValidationSchema, useSignUpStyles, SignUpHeader, SignupApiReturn, SignupMessage, SubmitButton } from '../register';
 import { Grid } from '@material-ui/core';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import { useFormik } from 'formik';

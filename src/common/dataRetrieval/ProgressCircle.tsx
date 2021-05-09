@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-
 import { CircularProgress } from '@material-ui/core';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 

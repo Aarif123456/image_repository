@@ -1,6 +1,6 @@
 import { ChangeEvent, FunctionComponent, MouseEvent } from 'react';
-import { Checkbox, TableCell, TableHead, TableRow, TableSortLabel } from '@material-ui/core';
 import { Order, TableData, useTableHeadStyle } from '../gallery';
+import { Checkbox, TableCell, TableHead, TableRow, TableSortLabel } from '@material-ui/core';
 import { IntlShape } from 'react-intl';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 export interface HeadCell<T> {

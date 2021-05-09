@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
-import clsx from 'clsx';
 import { useToolbarStyles } from '../gallery';
+import clsx from 'clsx';
 import { IconButton, Tooltip, Toolbar, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';

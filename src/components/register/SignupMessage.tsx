@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { FetchComponentProps } from '../../common/dataRetrieval';
+import { FetchComponentProps } from '../../common';
 import { FormattedMessage } from 'react-intl';
 export type SignupApiReturn = {
     id: string | number;

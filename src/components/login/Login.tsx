@@ -1,15 +1,10 @@
 import { FunctionComponent } from 'react';
-import { Link, TextField } from '../../common';
-import { FormValues, getValidationSchema } from './FormStructure';
-import { useLoginStyles } from './LoginStyle';
-import { SubmitButton } from './LoginSubmitButton';
-import { LoginHeader } from './LoginHeader';
-import { LoginApiReturn, LoginMessage } from './LoginMessage';
+import { Link, TextField, useAjax, ProgressCircle } from '../../common';
+import { FormValues, getValidationSchema, useLoginStyles, SubmitButton, LoginHeader, LoginApiReturn, LoginMessage } from '../login';
 import { Grid, FormControlLabel, Checkbox } from '@material-ui/core';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import { useFormik } from 'formik';
 import { useIntl } from 'react-intl';
-import { useAjax, ProgressCircle } from '../../common/dataRetrieval';
 import { useHistory } from 'react-router-dom';
 /* Modified from https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in */
 

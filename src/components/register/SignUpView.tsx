@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 /* Handle error in program */
-import { ErrorFallback } from '../../common/errorHandling';
+import { ErrorFallback } from '../../common';
 import { Container } from '@material-ui/core';
 import { SignUp } from './SignUp';
 
