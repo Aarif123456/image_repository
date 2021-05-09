@@ -8,6 +8,7 @@ export interface FormValues {
     password: string;
     confirmPassword: string;
 }
+
 export function getValidationSchema(intl: IntlShape): yup.SchemaOf<FormValues> {
     return yup
         .object({

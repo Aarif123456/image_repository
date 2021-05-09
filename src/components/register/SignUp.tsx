@@ -20,7 +20,7 @@ type SuccessProps = FetchComponentProps<SignupApiReturn | ErrorType>;
 export const SuccessComponent: FunctionComponent<SuccessProps> = ({ data }) => {
     console.log(data);
     if (data !== undefined) {
-        if ('id' in data && data.id as number !== undefined) {
+        if ('id' in data && (data.id as number) !== undefined) {
             return <div> Congrats you signed up! </div>;
         } else if ('message' in data && data.message !== undefined) {
             return <div> {data.message} </div>;
@@ -143,8 +143,7 @@ export const SignUp: FunctionComponent = () => {
                 <SubmitButton />
                 <Grid container justify='flex-end'>
                     <Grid item>
-                        <Link to='/login' linkProps={{ variant: 'body2' }}
-                              labelTranslatorId='UserManagement.alreadyRegistered' />
+                        <Link to='/login' linkProps={{ variant: 'body2' }} labelTranslatorId='UserManagement.alreadyRegistered' />
                     </Grid>
                 </Grid>
                 <Grid container justify='flex-start'>

@@ -11,7 +11,13 @@ export type AjaxType<T, Y> = {
 };
 export type Setters<T> = (x: T) => void;
 
-export function ajaxCall<T, Y>(endpoint: string, setLoading: Setters<boolean>, setData: Setters<T | ErrorType>, setError: Setters<boolean>, args?: Y): void {
+export function ajaxCall<T, Y>(
+    endpoint: string,
+    setLoading: Setters<boolean>,
+    setData: Setters<T | ErrorType>,
+    setError: Setters<boolean>,
+    args?: Y
+): void {
     type ReturnType = T | ErrorType;
     setLoading(true);
     AXIOS_ENDPOINT.post(endpoint, args)

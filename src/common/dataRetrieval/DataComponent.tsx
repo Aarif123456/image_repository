@@ -1,10 +1,12 @@
 import { FunctionComponent, ReactNode } from 'react';
 import { useIntl } from 'react-intl';
 import { RetrieveErrorBox, ProgressCircle, useAjax, ErrorType } from '../dataRetrieval';
+
 export type ErrorMessageType = { errorMessage?: string };
 export type FetchComponentProps<T> = {
     data: T;
 };
+
 interface Props<T, Y> {
     SuccessReturn: FunctionComponent<FetchComponentProps<T>>;
     endpoint: string;
@@ -14,11 +16,11 @@ interface Props<T, Y> {
 
 export function DataComponent<T, Y>(props: Props<T, Y> & { children?: ReactNode }): JSX.Element {
     const { SuccessReturn, endpoint, isReady, args } = props;
-    const { data, isLoading, isError } = useAjax<T, Y>(endpoint, isReady, args);
+    const { data, isLoading, isError, ajax } = useAjax<T, Y>(endpoint);
     const intl = useIntl();
     /*If component is not ready to call then we just return a placeholder */
-    if (!isReady) return <div />;
-    if (isError && (data as ErrorType) !== undefined) {
+    if (isReady && !isLoading) ajax(args);
+    if (isError) {
         const errMsg = (data as ErrorType)?.error;
         return <RetrieveErrorBox errorMessage={errMsg} />;
     }
