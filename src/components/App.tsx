@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-// import { HomeView, LoginView } from '../components/View';
 import { HomeView } from './home';
 import { LoginView } from './login';
 import { SignUpView } from './register';
+import { GalleryView } from './gallery';
 /* Import the pages of the website */
 import { NotFound } from '../common/errorHandling';
 /* Import to control the color scheme like dark mode */
@@ -28,13 +28,14 @@ export const App: FunctionComponent = () => (
         <CssBaseline />
         <BrowserRouter>
             <Switch>
-                {/*<Route path='/gallery/:id'>
-                    <GalleryView/>
-                </Route>
+                {/*
                 <Route exact path='/forgotPassword'>
                     <ForgotPasswordView />
                 </Route>
                 */}
+                <Route path='/gallery'>
+                    <GalleryView />
+                </Route>
                 <Route exact path='/login'>
                     <LoginView />
                 </Route>
