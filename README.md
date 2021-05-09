@@ -1,9 +1,8 @@
 # Image Repository
 
+# What is this? 🤔
 This is an image repository created for
 the [Shopify Developer Intern Challenge](https://docs.google.com/document/d/1ZKRywXQLZWOqVOHC4JkF3LqdpO3Llpfk_CkZPR8bjak)
-
-# What is this? 🤔
 
 # Quick Start :rocket:
 ## Features 
@@ -33,7 +32,7 @@ To run React locally clone this repository and run `npm start` and open [http://
     Describe frameworks used - and add in diagrams
         *React-Intl
         *Jest
-    Front End (React), Back-end(PHP), Encryption (Java hosted on GCP)
+    Front End (React), Back-end(PHP), Encryption (Java hosted on Google Cloud), Database(Maria DB [MySQL])
 
 ## DONE :star2:
 
