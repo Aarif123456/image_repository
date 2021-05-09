@@ -16,43 +16,47 @@ the [Shopify Developer Intern Challenge](https://docs.google.com/document/d/1ZKR
         * Upload images - first one at a time then add bulk
         * Select who has access to images and can block user
         * Image uploaded securely -secure in transport and rest
+    View images
+        * view what images they have uploaded
     Delete images
         * Bulk delete
         * Can only delete image uploaded by user
         * secure deletion
     User management - this is meant to managed by a third party admin in the future
-        * Users can register and fill out personal info
         * Users can view what they upload and set permission
         * Track banned users, attributes and specific file revocation
 
 ## TODO
+* View
+    * view files user has uploaded
+    * download chosen file - make sure it is the same as when u uploaded
+    * view image in tile form (after)
+    * view files in folder (after)
+* Upload
+    * upload file to user's account
+    * make sure file if encrypted
+* Delete
+    * delete selected file - make sure user can only delete file in their folder
+    * Test mass deletion (after)
+    * delete folder (after)
+* Change permission
+    * change permission of file
+    * change permission of all files in folder (after)
 
-* Test storing file in databases and store folder structure
-* Test deleting file
-* Test with encryption
-* Incorporating uploading with users
-* Make sure downloading/viewing works for user
-* Allow users to browse their files
-* Allow user to delete only their files
-* Allow mass deletion using checkbox selection
-* Allow user to change access on file
-* Allow user to logout
-* redirect user from register and logged in page if they are logged in
-* Make sure user cannot double submit in Formik in signup - read documentation
+* Allow user to logout (after)
 * Create test cases - for php and react
     * Test to make sure front-end can remember user
 * Create diagrams explaining what the system does and add explanation of how to build
     * ER diagram
     * System design diagram - how everything ties together
     * Check out other read-me
-* Track who viewed the files
-* Add in [background](https://www.npmjs.com/package/particles-bg)
 
 ## DONE
 
 * Fix CP-ABE repository to allow us set properties
 * Create function to create user attributes from info
-* Use PHP auth to allow users to register
+* Allow users to register
+* Allow users to login
 
 ## Testing TODO
 
