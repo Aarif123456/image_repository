@@ -1,4 +1,3 @@
-export * from './FormStructure';
 export * from './Gallery';
 export * from './GalleryControlButton';
 export * from './GalleryStyle';
