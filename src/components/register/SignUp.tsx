@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent } from 'react';
 import { useSignUpStyles } from './SignUpStyle';
 import { SignUpHeader } from './SignUpHeader';
 import { Link, TextField } from '../../common';
@@ -8,23 +8,33 @@ import { SubmitButton } from './SignUpSubmitButton';
 import { FormValues, getValidationSchema } from './FormStructure';
 import { useFormik } from 'formik';
 import { useIntl } from 'react-intl';
-import { DataComponent, FetchComponentProps } from '../../common/dataRetrieval';
+import { useAjax, FetchComponentProps, ErrorType } from '../../common/dataRetrieval';
 /* Modified from https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-up */
-/*TODO: replace with shape of actual api */
 type SignupApiReturn = {
+    id: string | number;
     message?: string;
+    error?: string;
 };
-type SuccessProps = FetchComponentProps<SignupApiReturn>;
+type SuccessProps = FetchComponentProps<SignupApiReturn | ErrorType>;
 
 export const SuccessComponent: FunctionComponent<SuccessProps> = ({ data }) => {
     console.log(data);
-    return <div> Congrats you signed up! </div>;
+    if (data !== undefined) {
+        if ('id' in data && data.id as number !== undefined) {
+            return <div> Congrats you signed up! </div>;
+        } else if ('message' in data && data.message !== undefined) {
+            return <div> {data.message} </div>;
+        } else if ('error' in data && data.error !== undefined) {
+            return <div> {data.error} </div>;
+        }
+    }
+    return <div />;
 };
+
 export const SignUp: FunctionComponent = () => {
     const classes: ClassNameMap = useSignUpStyles();
     const intl = useIntl();
     const validationSchema = getValidationSchema(intl);
-    const [isSubmitted, setSubmitted] = useState(false);
     const formik = useFormik({
         initialValues: validationSchema.cast({
             email: '',
@@ -35,20 +45,19 @@ export const SignUp: FunctionComponent = () => {
         }),
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            setSubmitted(true);
-            alert(JSON.stringify(values, null, 2));
+            ajax(values as FormValues);
         }
     });
 
-    const submittedElement = DataComponent<SignupApiReturn, FormValues>({
-        isReady: isSubmitted,
-        SuccessReturn: SuccessComponent,
-        endpoint: 'signup',
-        args: formik.values as FormValues
-    });
-    if (isSubmitted) {
-        return submittedElement;
-    }
+    const { data, ajax } = useAjax<SignupApiReturn, FormValues>('/userManagement/addUser');
+    const submittedElement = <SuccessComponent data={data} />;
+    // TODO: remove or use
+    // DataComponent<SignupApiReturn, FormValues>({
+    //     isReady: formik.isSubmitting,
+    //     SuccessReturn: ,
+    //     endpoint: '/userManagement/addUser',
+    //     args: formik.values as FormValues
+    // });
 
     /* Manage form data then pass it to the submit button */
     return (
@@ -134,8 +143,12 @@ export const SignUp: FunctionComponent = () => {
                 <SubmitButton />
                 <Grid container justify='flex-end'>
                     <Grid item>
-                        <Link to='/login' linkProps={{ variant: 'body2' }} labelTranslatorId='UserManagement.alreadyRegistered' />
+                        <Link to='/login' linkProps={{ variant: 'body2' }}
+                              labelTranslatorId='UserManagement.alreadyRegistered' />
                     </Grid>
+                </Grid>
+                <Grid container justify='flex-start'>
+                    {submittedElement}
                 </Grid>
             </form>
         </div>
