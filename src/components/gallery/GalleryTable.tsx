@@ -1,10 +1,19 @@
 import { useState, ChangeEvent, MouseEvent, FunctionComponent } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import { Table, TableBody, TableRow, TableContainer, TablePagination, Paper, FormControlLabel, Switch } from '@material-ui/core';
 
-import { GalleryTableHead, GalleryTableRow, getComparator, stableSort, Order, HeadCell, GalleryTableToolbar } from '../gallery';
+import {
+    GalleryTableHead,
+    GalleryTableRow,
+    getComparator,
+    stableSort,
+    Order,
+    HeadCell,
+    GalleryTableToolbar,
+    useGalleryTableStyle
+} from '../gallery';
 import { useIntl } from 'react-intl';
+import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 
 export interface TableData {
     calories: number;
@@ -37,34 +46,8 @@ const headCells: HeadCell<TableData>[] = [
     { id: 'protein', numeric: true }
 ];
 
-const useGalleryTableStyle = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            width: '100%'
-        },
-        paper: {
-            width: '100%',
-            marginBottom: theme.spacing(2)
-        },
-        table: {
-            minWidth: 750
-        },
-        visuallyHidden: {
-            border: 0,
-            clip: 'rect(0 0 0 0)',
-            height: 1,
-            margin: -1,
-            overflow: 'hidden',
-            padding: 0,
-            position: 'absolute',
-            top: 20,
-            width: 1
-        }
-    })
-);
-
 export const GalleryTable: FunctionComponent = () => {
-    const classes = useGalleryTableStyle();
+    const classes: ClassNameMap = useGalleryTableStyle();
     const [order, setOrder] = useState<Order>('asc');
     /*TODO: by default sort by image name */
     const [orderBy, setOrderBy] = useState<keyof TableData>('name');
@@ -136,7 +119,6 @@ export const GalleryTable: FunctionComponent = () => {
                             id: 'GalleryTable.transporterTable'
                         })}>
                         <GalleryTableHead
-                            classes={classes}
                             numSelected={selected.length}
                             onSelectAllClick={handleSelectAllClick}
                             onRequestSort={handleRequestSort}

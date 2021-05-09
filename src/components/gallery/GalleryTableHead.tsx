@@ -1,17 +1,8 @@
 import { ChangeEvent, FunctionComponent, MouseEvent } from 'react';
 import { Checkbox, TableCell, TableHead, TableRow, TableSortLabel } from '@material-ui/core';
-import { Order, TableData } from '../gallery';
+import { Order, TableData, useTableHeadStyle } from '../gallery';
 import { IntlShape } from 'react-intl';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
-/* TODO: import Table Data
-interface Data {
-  calories: number;
-  carbs: number;
-  fat: number;
-  name: string;
-  protein: number;
-}
-*/
 export interface HeadCell<T> {
     numeric: boolean;
     id: keyof T;
@@ -29,7 +20,6 @@ export interface GalleryTableProps<T> {
     rowCount: number;
     intl: IntlShape;
     headCells: HeadCell<T>[];
-    classes: ClassNameMap;
 }
 
 function createSortHandler<T>(property: keyof T, onRequestSort: OnRequestSortParameter<T>) {
@@ -39,7 +29,6 @@ function createSortHandler<T>(property: keyof T, onRequestSort: OnRequestSortPar
 }
 /* Handle toggling of sort button */
 export const GalleryTableHead: FunctionComponent<GalleryTableProps<TableData>> = ({
-    classes,
     numSelected,
     onRequestSort,
     onSelectAllClick,
@@ -49,6 +38,7 @@ export const GalleryTableHead: FunctionComponent<GalleryTableProps<TableData>> =
     headCells,
     intl
 }) => {
+    const classes: ClassNameMap = useTableHeadStyle();
     return (
         <TableHead>
             <TableRow>

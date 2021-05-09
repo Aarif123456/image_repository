@@ -1,7 +1,6 @@
 import { FunctionComponent } from 'react';
-import { useHomeStyles } from '.';
+import { useHomeStyles, LoginButton, SignUpButton } from '../home';
 import { Grid, ButtonGroup } from '@material-ui/core';
-import { LoginButton, SignUpButton } from '.';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 
 export const Home: FunctionComponent = () => {

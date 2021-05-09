@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Checkbox, TableCell, TableRow } from '@material-ui/core';
-import { TableData } from '.';
+import { TableData } from '../gallery';
 /* Used for the search button Icon used to go to the appropriate session timeline */
 
 interface GalleryTableRowProps {
