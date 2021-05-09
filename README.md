@@ -1,9 +1,14 @@
 # Image Repository
-This is an image repository created for the [Shopify Developer Intern Challenge](https://docs.google.com/document/d/1ZKRywXQLZWOqVOHC4JkF3LqdpO3Llpfk_CkZPR8bjak)
+
+This is an image repository created for
+the [Shopify Developer Intern Challenge](https://docs.google.com/document/d/1ZKRywXQLZWOqVOHC4JkF3LqdpO3Llpfk_CkZPR8bjak)
 
 ## Tech stack
 
     React, PHP, MySQl, Java, 
+    Describe frameworks used - and add in diagrams
+        *React-Intl
+        *Jest
 
 ## Features
 
@@ -22,26 +27,36 @@ This is an image repository created for the [Shopify Developer Intern Challenge]
 
 ## TODO
 
-* Use PHP auth to allow users to register
-* Create function to create user attributes from info
-* Create function to create system attributes
-* Test storing file in databases and store folder structure 
+* Test storing file in databases and store folder structure
 * Test deleting file
 * Test with encryption
 * Incorporating uploading with users
-* Make sure downloading works for user
+* Make sure downloading/viewing works for user
 * Allow users to browse their files
-* Allow user to delete only their files 
-* Allow mass deletion using checkbox selection and setting properties
+* Allow user to delete only their files
+* Allow mass deletion using checkbox selection
+* Allow user to change access on file
+* Allow user to logout
+* redirect user from register and logged in page if they are logged in
+* Make sure user cannot double submit in Formik in signup - read documentation
+* Create test cases - for php and react
+    * Test to make sure front-end can remember user
+* Create diagrams explaining what the system does and add explanation of how to build
+    * ER diagram
+    * System design diagram - how everything ties together
+    * Check out other read-me
 * Track who viewed the files
 * Add in [background](https://www.npmjs.com/package/particles-bg)
 
-## Testing TODO
-    * Make sure Login and Sign up work
-    
 ## DONE
 
-    * Fix mCP-ABE repository to allow us set properties 
+* Fix CP-ABE repository to allow us set properties
+* Create function to create user attributes from info
+* Use PHP auth to allow users to register
+
+## Testing TODO
+
+* Make sure Login and Sign up work
 
 ## Running Program
 
@@ -50,8 +65,9 @@ This is an image repository created for the [Shopify Developer Intern Challenge]
 
 ## Related Repository
 
-* mCP-ABE encryption used to encrypt files so even if n hacker got their hands on the file it would still be encrypted
+* CP-ABE encryption used to encrypt files so even if n hacker got their hands on the file it would still be encrypted
 * PHP Back-end and MySQl tables
 
 ## References
+
 [Space background](https://wallpaperaccess.com/4k-space)
