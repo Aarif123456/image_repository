@@ -1,7 +1,13 @@
 import { FunctionComponent } from 'react';
-import { GalleryTable } from '.';
+import { GalleryTable, GalleryControlButton, useGalleryRootStyle } from '../gallery';
+import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 
 export const Gallery: FunctionComponent = () => {
-    /*TODO: add in button */
-    return <GalleryTable />;
+    const classes: ClassNameMap = useGalleryRootStyle();
+    return (
+        <div className={classes.root}>
+            <GalleryControlButton />
+            <GalleryTable />
+        </div>
+    );
 };

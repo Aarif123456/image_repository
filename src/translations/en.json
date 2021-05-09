@@ -1,4 +1,8 @@
 {
+    "DragZone.acceptedPrompt": "Your file has been added!",
+    "DragZone.dragPrompt": "Drag 'n' drop some files here, or click to select files",
+    "DragZone.fileTypePrompt": "Only images will be accepted",
+    "DragZone.rejectedPrompt": "This file is not authorized",
     "Error.404.errorBody": "Error 404",
     "Error.404.greeting": "Hello!",
     "Error.404.message": "Oh no it looks we lost you. Not to worry, you can continue using the search bar to get you to the right page!",
@@ -22,9 +26,9 @@
     "UserManagement.requiredLastName": "You need to enter your last name",
     "UserManagement.requiredPassword": "Password is required",
     "UserManagement.signup": "Sign Up",
+    "UserManagement.signupSuccess": "You have successfully created an account !",
     "UserManagement.validConfirmPassword": "Please make sure the passwords match",
     "UserManagement.validEmail": "Enter a valid email",
     "UserManagement.validPassword": "Password should be of minimum 8 characters length",
-    "UserManagement.signupSuccess": "You have successfully created an account !",
     "Website.name": "Image Repository"
 }
