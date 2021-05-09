@@ -34,6 +34,7 @@ export function ajaxCall<T, Y>(
             if ((error as Error) !== undefined) {
                 const e: ErrorType = { error: (error as Error).message ?? 'Unknown error' };
                 setError(e);
+                setLoading(false);
             }
         });
 }

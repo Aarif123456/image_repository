@@ -10,7 +10,7 @@
     "UserManagement.confirmPassword": "Confirm Password",
     "UserManagement.email": "Email Address",
     "UserManagement.firstName": "First Name",
-    "UserManagement.forgotPasssword": "Forgot password?",
+    "UserManagement.forgotPassword": "Forgot password?",
     "UserManagement.lastName": "Last Name",
     "UserManagement.login": "Sign In",
     "UserManagement.notRegistered": "Don't have an account? Sign Up",
@@ -25,5 +25,6 @@
     "UserManagement.validConfirmPassword": "Please make sure the passwords match",
     "UserManagement.validEmail": "Enter a valid email",
     "UserManagement.validPassword": "Password should be of minimum 8 characters length",
+    "UserManagement.signupSuccess": "You have successfully created an account !",
     "Website.name": "Image Repository"
 }

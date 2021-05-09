@@ -1,30 +1,23 @@
-import { FunctionComponent, useState } from 'react';
-import { useLoginStyles } from './LoginStyle';
-import { LoginHeader } from './LoginHeader';
+import { FunctionComponent } from 'react';
 import { Link, TextField } from '../../common';
+import { FormValues, getValidationSchema } from './FormStructure';
+import { useLoginStyles } from './LoginStyle';
+import { SubmitButton } from './LoginSubmitButton';
+import { LoginHeader } from './LoginHeader';
+import { LoginApiReturn, LoginMessage } from './LoginMessage';
 import { Grid, FormControlLabel, Checkbox } from '@material-ui/core';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
-import { SubmitButton } from './LoginSubmitButton';
-import { FormValues, getValidationSchema } from './FormStructure';
 import { useFormik } from 'formik';
 import { useIntl } from 'react-intl';
-import { DataComponent, FetchComponentProps } from '../../common/dataRetrieval';
+import { useAjax, ProgressCircle } from '../../common/dataRetrieval';
+import { useHistory } from 'react-router-dom';
 /* Modified from https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in */
-/*TODO: replace with shape of actual api */
-type LoginApiReturn = {
-    message?: string;
-};
-type SuccessProps = FetchComponentProps<LoginApiReturn>;
 
-export const SuccessComponent: FunctionComponent<SuccessProps> = ({ data }) => {
-    console.log(data);
-    return <div> Congrats you signed in... </div>;
-};
 export const Login: FunctionComponent = () => {
     const classes: ClassNameMap = useLoginStyles();
     const intl = useIntl();
+    const history = useHistory();
     const validationSchema = getValidationSchema(intl);
-    const [isSubmitted, setSubmitted] = useState(false);
     const formik = useFormik({
         initialValues: validationSchema.cast({
             email: '',
@@ -33,19 +26,20 @@ export const Login: FunctionComponent = () => {
         }),
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            setSubmitted(true);
-            alert(JSON.stringify(values, null, 2));
+            ajax(values as FormValues);
         }
     });
+    const { data, isLoading, error, ajax } = useAjax<LoginApiReturn, FormValues>('/userManagement/loginUser');
 
-    const submittedElement = DataComponent<LoginApiReturn, FormValues>({
-        isReady: isSubmitted,
-        SuccessReturn: SuccessComponent,
-        endpoint: 'login',
-        args: formik.values as FormValues
-    });
-    if (isSubmitted) {
-        return submittedElement;
+    if (data !== undefined) {
+        const { loggedIn } = data;
+        if (loggedIn) {
+            history.push('/gallery');
+        }
+    }
+
+    if (isLoading) {
+        return <ProgressCircle />;
     }
 
     /* Manage form data then pass it to the submit button */
@@ -87,11 +81,14 @@ export const Login: FunctionComponent = () => {
                 <SubmitButton />
                 <Grid container justify='flex-end'>
                     <Grid item xs>
-                        <Link to='/forgotPassword' linkProps={{ variant: 'body2' }} labelTranslatorId='UserManagement.forgotPasssword' />
+                        <Link to='/forgotPassword' linkProps={{ variant: 'body2' }} labelTranslatorId='UserManagement.forgotPassword' />
                     </Grid>
                     <Grid item>
                         <Link to='/signUp' linkProps={{ variant: 'body2' }} labelTranslatorId='UserManagement.notRegistered' />
                     </Grid>
+                </Grid>
+                <Grid container justify='flex-start'>
+                    <LoginMessage message={data !== undefined ? data.message : error !== undefined ? error.error : ''} />
                 </Grid>
             </form>
         </div>

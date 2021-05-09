@@ -1,40 +1,17 @@
 import { FunctionComponent } from 'react';
+import { useAjaxComponent, SimpleErrorMessage } from '../../common/dataRetrieval';
+import { Link, TextField } from '../../common';
+import { FormValues, getValidationSchema } from './FormStructure';
 import { useSignUpStyles } from './SignUpStyle';
 import { SignUpHeader } from './SignUpHeader';
-import { Link, TextField } from '../../common';
+import { SignupApiReturn, SignupMessage } from './SignupMessage';
+import { SubmitButton } from './SignUpSubmitButton';
 import { Grid } from '@material-ui/core';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
-import { SubmitButton } from './SignUpSubmitButton';
-import { FormValues, getValidationSchema } from './FormStructure';
 import { useFormik } from 'formik';
 import { useIntl } from 'react-intl';
-import { ErrorMessageType, FetchComponentProps, useAjaxComponent } from '../../common/dataRetrieval';
+
 /* Modified from https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-up */
-type SignupApiReturn = {
-    id: string | number;
-    message?: string;
-};
-type SuccessProps = FetchComponentProps<SignupApiReturn>;
-
-export const SignupMessage: FunctionComponent<SuccessProps> = ({ data }) => {
-    console.log(data);
-    if (data !== undefined) {
-        if ('id' in data && data.id !== undefined) {
-            return <div> Congrats you signed up! </div>;
-        } else if ('message' in data && data.message !== undefined) {
-            return <div> {data.message} </div>;
-        }
-    }
-    return <div />;
-};
-
-export const SignupErrorMessage: FunctionComponent<ErrorMessageType> = ({ errorMessage }) => {
-    console.log(errorMessage);
-    if (errorMessage !== undefined) {
-        return <div> {errorMessage} </div>;
-    }
-    return <div />;
-};
 
 export const SignUp: FunctionComponent = () => {
     const classes: ClassNameMap = useSignUpStyles();
@@ -57,7 +34,7 @@ export const SignUp: FunctionComponent = () => {
     const { ajax, AjaxComponent } = useAjaxComponent<SignupApiReturn, FormValues>({
         endpoint: '/userManagement/addUser',
         SuccessComponent: SignupMessage,
-        ErrorComponent: SignupErrorMessage
+        ErrorComponent: SimpleErrorMessage
     });
 
     /* Manage form data then pass it to the submit button */
