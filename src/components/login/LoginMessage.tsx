@@ -9,6 +9,5 @@ type Props = {
     message?: string;
 };
 export const LoginMessage: FunctionComponent<Props> = ({ message }) => {
-    console.log(message);
     return <div> {message} </div>;
 };

@@ -30,7 +30,6 @@ export function ajaxCall<T, Y>(
             }
         })
         .catch((error): void => {
-            console.log(error);
             if ((error as Error) !== undefined) {
                 const e: ErrorType = { error: (error as Error).message ?? 'Unknown error' };
                 setError(e);
