@@ -9,6 +9,8 @@
     "Error.processingError": "Processing Error: {errorMessage}",
     "Error.retrieveError": " <b>Error</b>: We encountered an error while retrieving data:<em>{errorMessage}</em> {breakingLine} {breakingLine} Try refreshing the page, and please contact our team if this issue persists.",
     "Error.UNEXPECTED_DATA_FORMAT": "Internal server error: data received does not match expected data format",
+    "FileManagement.clear": "Clear",
+    "FileManagement.upload": "Upload",
     "Footer.copyright": "Copyright ©",
     "UserManagement.alreadyRegistered": "Already have an account? Sign in",
     "UserManagement.confirmPassword": "Confirm Password",

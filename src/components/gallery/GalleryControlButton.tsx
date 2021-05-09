@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { useGalleryButtonStyle } from '../gallery';
+import { useGalleryButtonStyle, SubmitButton, ResetButton } from '../gallery';
 import { Dropzone } from '../../common';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import { useFormik } from 'formik';
@@ -14,6 +14,17 @@ export const GalleryControlButton: FunctionComponent = () => {
         onSubmit: (values) => {
             if (values.files === undefined) return;
             // ajax(values as FormValues);
+            /* Quick validation here so we don't waste time getting an error in the back-end*/
+            /* We have to make sure file name are unique*/
+            const files: File[] = [];
+            const map = new Map<string, boolean>();
+            for (const file of values.files as File[]) {
+                if (!map.has(file.name)) {
+                    map.set(file.name, true); // set any value to Map
+                    files.push(file);
+                }
+            }
+            console.log(files);
             alert(
                 JSON.stringify(
                     {
@@ -44,6 +55,8 @@ export const GalleryControlButton: FunctionComponent = () => {
         <>
             <form className={classes.form} onSubmit={formik.handleSubmit} noValidate>
                 <Dropzone onDropHandler={onDropHandler} files={formik.values.files ?? []} />
+                <SubmitButton />
+                <ResetButton resetForm={formik.resetForm} />
             </form>
         </>
     );
