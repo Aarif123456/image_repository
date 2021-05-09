@@ -3,14 +3,10 @@
 This is an image repository created for
 the [Shopify Developer Intern Challenge](https://docs.google.com/document/d/1ZKRywXQLZWOqVOHC4JkF3LqdpO3Llpfk_CkZPR8bjak)
 
-## Tech stack
+# What is this? 🤔
 
-    React, PHP, MySQl, Java, 
-    Describe frameworks used - and add in diagrams
-        *React-Intl
-        *Jest
-
-## Features
+# Quick Start :rocket:
+## Features 
 
     Add images
         * Upload images - first one at a time then add bulk
@@ -26,7 +22,27 @@ the [Shopify Developer Intern Challenge](https://docs.google.com/document/d/1ZKR
         * Users can view what they upload and set permission
         * Track banned users, attributes and specific file revocation
 
-## TODO
+# How to use? :artificial_satellite:
+I recommend looking first checking out the live demo at INSERT_URL_HERE
+To run React locally clone this repository and run `npm start` and open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+# Building :construction:
+## Technology stack :gear:
+
+    React, PHP, MySQl, Java, 
+    Describe frameworks used - and add in diagrams
+        *React-Intl
+        *Jest
+    Front End (React), Back-end(PHP), Encryption (Java hosted on GCP)
+
+## DONE :star2:
+
+* Fix CP-ABE repository to allow us set properties
+* Create function to create user attributes from info
+* Allow users to register
+* Allow users to login
+
+## TODO :alarm_clock:
 * View
     * view files user has uploaded
     * download chosen file - make sure it is the same as when u uploaded
@@ -51,27 +67,16 @@ the [Shopify Developer Intern Challenge](https://docs.google.com/document/d/1ZKR
     * System design diagram - how everything ties together
     * Check out other read-me
 
-## DONE
-
-* Fix CP-ABE repository to allow us set properties
-* Create function to create user attributes from info
-* Allow users to register
-* Allow users to login
-
 ## Testing TODO
 
 * Make sure Login and Sign up work
+   
 
-## Running Program
-
-    I recommend looking first checking out the live demo at INSERT_URL_HERE
-    To run React locally clone this repository and run `npm start` and open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-## Related Repository
+## Related Repository :detective:
 
 * CP-ABE encryption used to encrypt files so even if n hacker got their hands on the file it would still be encrypted
 * PHP Back-end and MySQl tables
 
-## References
+## References :books:
 
 [Space background](https://wallpaperaccess.com/4k-space)
