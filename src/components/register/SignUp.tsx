@@ -8,25 +8,30 @@ import { SubmitButton } from './SignUpSubmitButton';
 import { FormValues, getValidationSchema } from './FormStructure';
 import { useFormik } from 'formik';
 import { useIntl } from 'react-intl';
-import { useAjax, FetchComponentProps, ErrorType } from '../../common/dataRetrieval';
+import { ErrorMessageType, FetchComponentProps, useAjaxComponent } from '../../common/dataRetrieval';
 /* Modified from https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-up */
 type SignupApiReturn = {
     id: string | number;
     message?: string;
-    error?: string;
 };
-type SuccessProps = FetchComponentProps<SignupApiReturn | ErrorType>;
+type SuccessProps = FetchComponentProps<SignupApiReturn>;
 
-export const SuccessComponent: FunctionComponent<SuccessProps> = ({ data }) => {
+export const SignupMessage: FunctionComponent<SuccessProps> = ({ data }) => {
     console.log(data);
     if (data !== undefined) {
-        if ('id' in data && (data.id as number) !== undefined) {
+        if ('id' in data && data.id !== undefined) {
             return <div> Congrats you signed up! </div>;
         } else if ('message' in data && data.message !== undefined) {
             return <div> {data.message} </div>;
-        } else if ('error' in data && data.error !== undefined) {
-            return <div> {data.error} </div>;
         }
+    }
+    return <div />;
+};
+
+export const SignupErrorMessage: FunctionComponent<ErrorMessageType> = ({ errorMessage }) => {
+    console.log(errorMessage);
+    if (errorMessage !== undefined) {
+        return <div> {errorMessage} </div>;
     }
     return <div />;
 };
@@ -49,15 +54,11 @@ export const SignUp: FunctionComponent = () => {
         }
     });
 
-    const { data, ajax } = useAjax<SignupApiReturn, FormValues>('/userManagement/addUser');
-    const submittedElement = <SuccessComponent data={data} />;
-    // TODO: remove or use
-    // DataComponent<SignupApiReturn, FormValues>({
-    //     isReady: formik.isSubmitting,
-    //     SuccessReturn: ,
-    //     endpoint: '/userManagement/addUser',
-    //     args: formik.values as FormValues
-    // });
+    const { ajax, AjaxComponent } = useAjaxComponent<SignupApiReturn, FormValues>({
+        endpoint: '/userManagement/addUser',
+        SuccessComponent: SignupMessage,
+        ErrorComponent: SignupErrorMessage
+    });
 
     /* Manage form data then pass it to the submit button */
     return (
@@ -147,7 +148,7 @@ export const SignUp: FunctionComponent = () => {
                     </Grid>
                 </Grid>
                 <Grid container justify='flex-start'>
-                    {submittedElement}
+                    <AjaxComponent />
                 </Grid>
             </form>
         </div>
