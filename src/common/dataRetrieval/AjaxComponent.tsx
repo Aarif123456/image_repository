@@ -1,26 +1,24 @@
 import { FunctionComponent, ReactNode } from 'react';
 import { useIntl } from 'react-intl';
-import { RetrieveErrorBox, ProgressCircle, useAjax, AjaxType } from '../dataRetrieval';
+import { RetrieveErrorBox, ProgressCircle, AjaxType } from '../dataRetrieval';
 
 export type ErrorMessageType = { errorMessage?: string };
 export type FetchComponentProps<T> = {
     data: T;
 };
 
-interface Props<T> {
-    endpoint: string;
+interface Props<T> extends Omit<AjaxType<T, unknown>, 'ajax'> {
     SuccessComponent: FunctionComponent<FetchComponentProps<T>>;
     LoadingComponent?: FunctionComponent;
     ErrorComponent?: FunctionComponent<ErrorMessageType>;
 }
 
-interface AjaxComponentReturn<T, Y> extends AjaxType<T, Y> {
+interface AjaxComponentReturn {
     AjaxComponent: FunctionComponent;
 }
 
-export function useAjaxComponent<T, Y>(props: Props<T> & { children?: ReactNode }): AjaxComponentReturn<T, Y> {
-    const { endpoint, SuccessComponent, ErrorComponent = RetrieveErrorBox, LoadingComponent = ProgressCircle } = props;
-    const { data, isLoading, error, ajax } = useAjax<T, Y>(endpoint);
+export function useAjaxComponent<T>(props: Props<T> & { children?: ReactNode }): AjaxComponentReturn {
+    const { SuccessComponent, ErrorComponent = RetrieveErrorBox, LoadingComponent = ProgressCircle, data, isLoading, error } = props;
     const intl = useIntl();
     const AjaxComponent: FunctionComponent = () => {
         /*If component is not ready to call then we just return a placeholder */
@@ -51,10 +49,6 @@ export function useAjaxComponent<T, Y>(props: Props<T> & { children?: ReactNode 
     };
 
     return {
-        data,
-        isLoading,
-        error,
-        ajax,
         AjaxComponent
     };
 }

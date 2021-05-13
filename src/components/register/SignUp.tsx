@@ -1,16 +1,18 @@
 import { FunctionComponent } from 'react';
-import { useAjaxComponent, SimpleErrorMessage, Link, TextField } from '../../common';
+import { useAjax, useAjaxComponent, SimpleErrorMessage, Link, TextField } from '../../common';
 import { FormValues, getValidationSchema, useSignUpStyles, SignUpHeader, SignupApiReturn, SignupMessage, SubmitButton } from '../register';
 import { Grid } from '@material-ui/core';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import { useFormik } from 'formik';
 import { useIntl } from 'react-intl';
+import { useHistory } from 'react-router-dom';
 
 /* Modified from https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-up */
 
 export const SignUp: FunctionComponent = () => {
     const classes: ClassNameMap = useSignUpStyles();
     const intl = useIntl();
+    const history = useHistory();
     const validationSchema = getValidationSchema(intl);
     const formik = useFormik({
         initialValues: validationSchema.cast({
@@ -22,15 +24,27 @@ export const SignUp: FunctionComponent = () => {
         }),
         validationSchema: validationSchema,
         onSubmit: (values) => {
+            if (isLoading && formik.isSubmitting) return;
             ajax(values as FormValues);
         }
     });
 
-    const { ajax, AjaxComponent } = useAjaxComponent<SignupApiReturn, FormValues>({
-        endpoint: '/userManagement/addUser',
+    const { data, isLoading, error, ajax } = useAjax<SignupApiReturn, FormValues>('/userManagement/addUser');
+    const { AjaxComponent } = useAjaxComponent<SignupApiReturn>({
         SuccessComponent: SignupMessage,
-        ErrorComponent: SimpleErrorMessage
+        ErrorComponent: SimpleErrorMessage,
+        data,
+        isLoading,
+        error
     });
+
+    if (data !== undefined) {
+        const { message, id } = data;
+        if (id > 0) {
+            console.log(message);
+            history.push('/gallery');
+        }
+    }
 
     /* Manage form data then pass it to the submit button */
     return (
