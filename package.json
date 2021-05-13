@@ -23,8 +23,8 @@
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "clean": "rm -rf build node_modules",
-        "fix": "prettier --write \"src/**/*.{ts,tsx}\" && eslint --fix \"src/**/*.{ts,tsx}\"",
-        "lint": "eslint \"src/**/*.{ts,tsx}"
+        "fix": "prettier --write \"src/**/*.{ts,tsx,json}\" && eslint --fix \"src/**/*.{ts,tsx,json}\"",
+        "lint": "eslint \"src/**/*.{ts,tsx,json}"
     },
     "eslintConfig": {
         "extends": [
