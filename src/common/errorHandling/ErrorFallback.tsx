@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { FunctionComponent } from 'react';
 
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
