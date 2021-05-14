@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
-import { useGalleryButtonStyle, SubmitButton, ResetButton, GalleryExpectedFileInfo, OperationInfo } from '.';
+import { useGalleryButtonStyle, SubmitButton, ResetButton } from '.';
 import { Dropzone, useAjax, useAjaxComponent } from '../../common';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import { useFormik } from 'formik';
-import { updateTable, useGallerySnackbar } from '.';
+import { updateTable, useGallerySnackbar, GalleryExpectedFileInfo, OperationInfo } from '../gallery';
 
 export type UploadReturnType = Record<string, OperationInfo>;
 
