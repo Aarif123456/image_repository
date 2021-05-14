@@ -9,6 +9,7 @@
     "Error.processingError": "Processing Error: {errorMessage}",
     "Error.retrieveError": " <b>Error</b>: We encountered an error while retrieving data:<em>{errorMessage}</em> {breakingLine} {breakingLine} Try refreshing the page, and please contact our team if this issue persists.",
     "FileManagement.clear": "Clear",
+    "FileManagement.delete": "delete",
     "FileManagement.download": "download",
     "FileManagement.someFileFailedTitle": "There were some problems",
     "FileManagement.upload": "Upload",

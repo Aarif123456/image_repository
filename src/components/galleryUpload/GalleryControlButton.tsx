@@ -1,21 +1,17 @@
 import { FunctionComponent } from 'react';
-import { useGalleryButtonStyle, SubmitButton, ResetButton, useGallerySnackbar, GalleryExpectedFileInfo } from '.';
+import { useGalleryButtonStyle, SubmitButton, ResetButton, GalleryExpectedFileInfo, OperationInfo } from '.';
 import { Dropzone, useAjax, useAjaxComponent } from '../../common';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import { useFormik } from 'formik';
-import { MutatorCallback } from 'swr/dist/types';
+import { updateTable, useGallerySnackbar } from '.';
 
-export type UploadInfo = {
-    success: boolean;
-    error?: string;
-};
-export type UploadReturnType = Record<string, UploadInfo>;
+export type UploadReturnType = Record<string, OperationInfo>;
 
 export type FormValues = {
     files: File[];
 };
-type Props = { mutate: MutatorCallback };
-export const GalleryControlButton: FunctionComponent<Props> = ({ mutate }) => {
+
+export const GalleryControlButton: FunctionComponent = () => {
     const classes: ClassNameMap = useGalleryButtonStyle();
     const { GalleryInformation, setOpen } = useGallerySnackbar();
     const { data, isLoading, error, ajax } = useAjax<UploadReturnType, FormData>('/fileManagement/upload.php');
@@ -26,7 +22,6 @@ export const GalleryControlButton: FunctionComponent<Props> = ({ mutate }) => {
         error
     });
 
-    console.error(error);
     const validateFiles = (values: FormValues): File[] => {
         /* Quick validation here so we don't waste time getting an error in the back-end*/
         /* We have to make sure file name are unique*/
@@ -56,7 +51,7 @@ export const GalleryControlButton: FunctionComponent<Props> = ({ mutate }) => {
                 ajax(formData);
                 formik.resetForm();
                 setOpen(true);
-                mutate(undefined);
+                updateTable();
             }
         }
     });

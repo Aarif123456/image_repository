@@ -1,16 +1,20 @@
 import { SyntheticEvent, useState, FunctionComponent, useEffect } from 'react';
 import { Snackbar } from '@material-ui/core';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
-import { UploadInfo } from './GalleryControlButton';
 import { FetchComponentProps } from '../../common';
 import { FormattedMessage } from 'react-intl';
+
+export type OperationInfo = {
+    success: boolean;
+    error?: string;
+};
 
 function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant='filled' {...props} />;
 }
 
 /* The format of our end point with information about what files were uploaded*/
-export type GalleryExpectedFileInfo = Array<[string, UploadInfo]>;
+export type GalleryExpectedFileInfo = Array<[string, OperationInfo]>;
 
 interface GallerySnackbarProps extends FetchComponentProps<GalleryExpectedFileInfo> {
     handleClose: (_event?: SyntheticEvent, reason?: string) => void;
@@ -29,8 +33,8 @@ export const GallerySnackbar: FunctionComponent<GallerySnackbarProps> = ({ open,
 
     /* Whenever our data gets changed we change our info */
     useEffect(() => {
-        setErrorData(data.filter(([_filename, uploadInfo]) => !uploadInfo.success));
-        setSuccessCount(data.filter(([_filename, uploadInfo]) => uploadInfo.success).length);
+        setErrorData(data.filter(([_filename, operationInfo]) => !operationInfo.success));
+        setSuccessCount(data.filter(([_filename, operationInfo]) => operationInfo.success).length);
     }, [data]);
 
     /* Don't react to empty requests. NOTE: it might make sense to use an info box to gently
@@ -64,13 +68,13 @@ export const GallerySnackbar: FunctionComponent<GallerySnackbarProps> = ({ open,
                         {' '}
                         <FormattedMessage id='FileManagement.someFileFailedTitle' />{' '}
                     </h2>
-                    {errorData.map(([filename, uploadInfo], index: number) => {
+                    {errorData.map(([filename, operationInfo], index: number) => {
                         return (
                             <p key={`gallery-snackbar-description ${filename} ${index}`}>
                                 <b>
                                     <FormattedMessage
                                         id='FileManagement.uploadedFailureInfo'
-                                        values={{ filename, errorMessage: uploadInfo.error ?? fallbackError }}
+                                        values={{ filename, errorMessage: operationInfo.error ?? fallbackError }}
                                     />{' '}
                                 </b>
                             </p>
