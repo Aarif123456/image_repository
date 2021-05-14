@@ -10,6 +10,7 @@ export type AjaxType<T, Y> = {
     ajax: (args?: Y) => void;
 };
 export type Setters<T> = (x: T) => void;
+export type ReturnType<T> = T | ErrorType;
 
 export function ajaxCall<T, Y>(
     endpoint: string,
@@ -18,11 +19,10 @@ export function ajaxCall<T, Y>(
     setError: Setters<ErrorType>,
     args?: Y
 ): void {
-    type ReturnType = T | ErrorType;
     setLoading(true);
     AXIOS_ENDPOINT.post(endpoint, args)
-        .then((response: AxiosResponse<ReturnType>) => {
-            const result: ReturnType = response.data;
+        .then((response: AxiosResponse<ReturnType<T>>) => {
+            const result: ReturnType<T> = response.data;
             setLoading(false);
             setData(result as T);
             if (result !== undefined && 'error' in result) {
