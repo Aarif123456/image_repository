@@ -1,5 +1,6 @@
 /* From https://github.com/mui-org/material-ui/blob/master/docs/src/pages/components/tables/EnhancedTable.tsx */
 import { TableData } from './GalleryTable';
+import { DateTime } from 'luxon';
 
 export type Order = 'asc' | 'desc';
 /* Function to handle comparison   */
@@ -17,7 +18,7 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T): number {
 export function getComparator<Key extends keyof TableData>(
     order: Order,
     orderBy: Key
-): (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number {
+): (a: { [key in Key]: number | string | DateTime }, b: { [key in Key]: number | string | DateTime }) => number {
     return order === 'desc'
         ? (a, b): number => descendingComparator(a, b, orderBy)
         : (a, b): number => -descendingComparator(a, b, orderBy);

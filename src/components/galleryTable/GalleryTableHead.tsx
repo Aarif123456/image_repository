@@ -1,5 +1,5 @@
 import { ChangeEvent, FunctionComponent, MouseEvent } from 'react';
-import { Order, TableData, useTableHeadStyle } from '../gallery';
+import { Order, TableData, useTableHeadStyle } from '.';
 import { Checkbox, TableCell, TableHead, TableRow, TableSortLabel } from '@material-ui/core';
 import { IntlShape } from 'react-intl';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
@@ -47,20 +47,16 @@ export const GalleryTableHead: FunctionComponent<GalleryTableProps<TableData>> =
                         indeterminate={numSelected > 0 && numSelected < rowCount}
                         checked={rowCount > 0 && numSelected === rowCount}
                         onChange={onSelectAllClick}
-                        inputProps={{ 'aria-label': 'select all desserts' }}
+                        inputProps={{ 'aria-label': intl.formatMessage({ id: 'Gallery.Table.checkboxLabel' }) }}
                     />
                 </TableCell>
                 {headCells.map((headCell: HeadCell<TableData>) => (
-                    <TableCell
-                        key={headCell.id}
-                        align={headCell.numeric ? 'right' : 'left'}
-                        padding='default'
-                        sortDirection={orderBy === headCell.id ? order : false}>
+                    <TableCell key={headCell.id} align='left' padding='none' sortDirection={orderBy === headCell.id ? order : false}>
                         <TableSortLabel
                             active={orderBy === headCell.id}
                             direction={orderBy === headCell.id ? order : 'asc'}
                             onClick={createSortHandler<TableData>(headCell.id, onRequestSort)}>
-                            {intl.formatMessage({ id: `Table.${headCell.id}` })}
+                            {intl.formatMessage({ id: `Gallery.Table.${headCell.id}` })}
                             {orderBy === headCell.id ? (
                                 <span className={classes.visuallyHidden}>
                                     {order === 'desc' ? 'sorted descending' : 'sorted ascending'}

@@ -1,7 +1,5 @@
 import { useState, ChangeEvent, MouseEvent, FunctionComponent } from 'react';
-import TableCell from '@material-ui/core/TableCell';
-import { Table, TableBody, TableRow, TableContainer, TablePagination, Paper, FormControlLabel, Switch } from '@material-ui/core';
-
+import { Table, TableBody, TableCell, TableRow, TableContainer, TablePagination, Paper, FormControlLabel, Switch } from '@material-ui/core';
 import {
     GalleryTableHead,
     GalleryTableRow,
@@ -11,51 +9,64 @@ import {
     HeadCell,
     GalleryTableToolbar,
     useGalleryTableStyle
-} from '../gallery';
+} from '../galleryTable';
 import { useIntl } from 'react-intl';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
+import { DateTime } from 'luxon';
 
 export interface TableData {
-    calories: number;
-    carbs: number;
-    fat: number;
-    name: string;
-    protein: number;
+    fileID: number;
+    fileName: string;
+    fileSize: number;
+    /* When the file was first uploaded */
+    uploaded: DateTime;
+    /* Folder */
+    filePath: string;
+    /* type of file*/
+    mime: string;
+    accessID: number;
 }
 
-function createData(name: string, calories: number, fat: number, carbs: number, protein: number): TableData {
-    return { name, calories, fat, carbs, protein };
+function createData(
+    fileID: number,
+    fileName: string,
+    fileSize: number,
+    uploadedDtString: string,
+    filePath: string,
+    mime: string,
+    accessID: number
+): TableData {
+    const uploaded = DateTime.fromSQL(uploadedDtString);
+    return { fileID, fileName, fileSize, filePath, uploaded, mime, accessID };
 }
 
-const rows = [
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Donut', 452, 25.0, 51, 4.9),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-    createData('Honeycomb', 408, 3.2, 87, 6.5),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3)
-];
-
-/*TODO: create actual headers*/
 const headCells: HeadCell<TableData>[] = [
-    { id: 'name', numeric: false },
-    { id: 'calories', numeric: true },
-    { id: 'fat', numeric: true },
-    { id: 'carbs', numeric: true },
-    { id: 'protein', numeric: true }
+    { id: 'fileName', numeric: false },
+    { id: 'fileSize', numeric: true },
+    { id: 'filePath', numeric: false },
+    { id: 'uploaded', numeric: false }
 ];
 
 export const GalleryTable: FunctionComponent = () => {
+    /******************* Hooks*******************/
     const classes: ClassNameMap = useGalleryTableStyle();
+    const intl = useIntl();
+
+    /******************* States *******************/
     const [order, setOrder] = useState<Order>('asc');
-    /*TODO: by default sort by image name */
-    const [orderBy, setOrderBy] = useState<keyof TableData>('name');
-    const [selected, setSelected] = useState<string[]>([]);
+    /* By default sort by image name */
+    const [orderBy, setOrderBy] = useState<keyof TableData>('fileName');
+    const [selected, setSelected] = useState<number[]>([]);
     const [page, setPage] = useState(0);
     const [dense, setDense] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const intl = useIntl();
+
+    /******************* Variables *******************/
+    const rows: TableData[] = [
+        createData(22, 'SystemContext.png', 17694, '2021-05-14 17:01:57', '', 'image/png', 1)
+        /* TODO: get rows*/
+    ];
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
     const handleRequestSort = (_event: MouseEvent<unknown>, property: keyof TableData) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -65,19 +76,20 @@ export const GalleryTable: FunctionComponent = () => {
 
     const handleSelectAllClick = (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.checked) {
-            const newSelected = rows.map((n) => n.name);
+            const newSelected = rows.map((n) => n.fileID);
             setSelected(newSelected);
             return;
         }
         setSelected([]);
     };
 
-    const handleClick = (_event: MouseEvent<unknown>, name: string) => {
-        const selectedIndex = selected.indexOf(name);
-        let newSelected: string[] = [];
+    const handleClick = (_event: MouseEvent<unknown>, id: number) => {
+        /* TODO: consider using a map instead of an array */
+        const selectedIndex = selected.indexOf(id);
+        let newSelected: number[] = [];
 
         if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, name);
+            newSelected = newSelected.concat(selected, id);
         } else if (selectedIndex === 0) {
             newSelected = newSelected.concat(selected.slice(1));
         } else if (selectedIndex === selected.length - 1) {
@@ -102,21 +114,19 @@ export const GalleryTable: FunctionComponent = () => {
         setDense(event.target.checked);
     };
 
-    const isSelected = (name: string) => selected.indexOf(name) !== -1;
-
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    const isSelected = (id: number) => selected.indexOf(id) !== -1;
 
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
-                <GalleryTableToolbar numSelected={selected.length} />
+                <GalleryTableToolbar selected={selected} />
                 <TableContainer>
                     <Table
                         className={classes.table}
                         aria-labelledby='tableTitle'
                         size={dense ? 'small' : 'medium'}
                         aria-label={intl.formatMessage({
-                            id: 'GalleryTable.transporterTable'
+                            id: 'Gallery.Table.title'
                         })}>
                         <GalleryTableHead
                             numSelected={selected.length}
@@ -132,14 +142,14 @@ export const GalleryTable: FunctionComponent = () => {
                             {stableSort(rows, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row: TableData, index: number) => {
-                                    const isItemSelected = isSelected(row.name);
+                                    const isItemSelected = isSelected(row.fileID);
                                     return (
                                         <GalleryTableRow
                                             row={row}
                                             labelId={`gallery-${index}`}
                                             isItemSelected={isItemSelected}
                                             handleClick={handleClick}
-                                            key={row.calories}
+                                            key={row.fileID}
                                         />
                                     );
                                 })}

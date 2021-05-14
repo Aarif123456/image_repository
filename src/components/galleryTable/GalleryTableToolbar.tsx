@@ -1,17 +1,19 @@
 import { FunctionComponent } from 'react';
-import { useToolbarStyles } from '../gallery';
-import clsx from 'clsx';
+import { useToolbarStyles } from '.';
 import { IconButton, Tooltip, Toolbar, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
+import clsx from 'clsx';
+import { FormattedMessage } from 'react-intl';
 
 interface GalleryTableToolbarProps {
-    numSelected: number;
+    selected: number[];
 }
 
-export const GalleryTableToolbar: FunctionComponent<GalleryTableToolbarProps> = ({ numSelected }) => {
+/* TODO: Typography should have a formatted message child*/
+export const GalleryTableToolbar: FunctionComponent<GalleryTableToolbarProps> = ({ selected }) => {
     const classes: ClassNameMap = useToolbarStyles();
+    const numSelected = selected.length;
 
     return (
         <Toolbar
@@ -20,23 +22,17 @@ export const GalleryTableToolbar: FunctionComponent<GalleryTableToolbarProps> = 
             })}>
             {numSelected > 0 ? (
                 <Typography className={classes.title} color='inherit' variant='subtitle1' component='div'>
-                    {numSelected} selected
+                    <FormattedMessage id='Gallery.Table.selected' values={{ numSelected }} />
                 </Typography>
             ) : (
                 <Typography className={classes.title} variant='h6' id='tableTitle' component='div'>
-                    Nutrition
+                    <FormattedMessage id='Gallery.Table.title' />
                 </Typography>
             )}
-            {numSelected > 0 ? (
+            {numSelected > 0 && (
                 <Tooltip title='Delete'>
                     <IconButton aria-label='delete'>
                         <DeleteIcon />
-                    </IconButton>
-                </Tooltip>
-            ) : (
-                <Tooltip title='Filter list'>
-                    <IconButton aria-label='filter list'>
-                        <FilterListIcon />
                     </IconButton>
                 </Tooltip>
             )}
