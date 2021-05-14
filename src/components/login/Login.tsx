@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Link, TextField, useAjax, ProgressCircle } from '../../common';
 import { FormValues, getValidationSchema, useLoginStyles, SubmitButton, LoginHeader, LoginApiReturn, LoginMessage } from '../login';
-import { Grid, FormControlLabel, Checkbox } from '@material-ui/core';
+import { Backdrop, Checkbox, FormControlLabel, Grid } from '@material-ui/core';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import { useFormik } from 'formik';
 import { useIntl } from 'react-intl';
@@ -13,6 +13,7 @@ export const Login: FunctionComponent = () => {
     const intl = useIntl();
     const history = useHistory();
     const validationSchema = getValidationSchema(intl);
+
     const formik = useFormik({
         initialValues: validationSchema.cast({
             email: '',
@@ -34,7 +35,12 @@ export const Login: FunctionComponent = () => {
     }
 
     if (isLoading) {
-        return <ProgressCircle />;
+        return (
+            <Backdrop className={classes.backdrop} open={true}>
+                {' '}
+                <ProgressCircle />{' '}
+            </Backdrop>
+        );
     }
 
     /* Manage form data then pass it to the submit button */
