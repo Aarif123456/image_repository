@@ -13,7 +13,10 @@ import {
 import { useIntl } from 'react-intl';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import { DateTime } from 'luxon';
+import { FetchComponentProps } from '../../common';
+import { FileApiReturnData, FileData } from '../gallery';
 
+/* TODO: figure out how to incorporate folders as well */
 export interface TableData {
     fileID: number;
     fileName: string;
@@ -47,7 +50,7 @@ const headCells: HeadCell<TableData>[] = [
     { id: 'uploaded', numeric: false }
 ];
 
-export const GalleryTable: FunctionComponent = () => {
+export const GalleryTable: FunctionComponent<FetchComponentProps<FileApiReturnData>> = ({ data }) => {
     /******************* Hooks*******************/
     const classes: ClassNameMap = useGalleryTableStyle();
     const intl = useIntl();
@@ -62,10 +65,10 @@ export const GalleryTable: FunctionComponent = () => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
     /******************* Variables *******************/
-    const rows: TableData[] = [
-        createData(22, 'SystemContext.png', 17694, '2021-05-14 17:01:57', '', 'image/png', 1)
-        /* TODO: get rows*/
-    ];
+    const rows: TableData[] = data.map((fd: FileData) => {
+        return createData(fd.fileID, fd.fileName, fd.fileSize, fd.uploaded, fd.filePath, fd.mime, fd.accessID);
+    });
+    console.log(rows);
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
     const handleRequestSort = (_event: MouseEvent<unknown>, property: keyof TableData) => {
@@ -84,7 +87,7 @@ export const GalleryTable: FunctionComponent = () => {
     };
 
     const handleClick = (_event: MouseEvent<unknown>, id: number) => {
-        /* TODO: consider using a map instead of an array */
+        /* NOTE: using a map over an array might increase performance */
         const selectedIndex = selected.indexOf(id);
         let newSelected: number[] = [];
 

@@ -18,24 +18,6 @@ export const FileManagementButtonGroup: FunctionComponent<TableData> = ({ fileNa
                 })}>
                 <CloudDownloadSharpIcon />
             </IconButton>
-            <IconButton
-                onClick={() => {
-                    alert(`Will trigger a download of the ${fileName} file`);
-                }}
-                aria-label={intl.formatMessage({
-                    id: 'FileManagement.download'
-                })}>
-                <CloudDownloadSharpIcon />
-            </IconButton>
-            <IconButton
-                onClick={() => {
-                    alert(`Will trigger a download of the ${fileName} file`);
-                }}
-                aria-label={intl.formatMessage({
-                    id: 'FileManagement.download'
-                })}>
-                <CloudDownloadSharpIcon />
-            </IconButton>
         </ButtonGroup>
     );
 };

@@ -3,6 +3,7 @@ import { useGalleryButtonStyle, SubmitButton, ResetButton, useGallerySnackbar, G
 import { Dropzone, useAjax, useAjaxComponent } from '../../common';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import { useFormik } from 'formik';
+import { MutatorCallback } from 'swr/dist/types';
 
 export type UploadInfo = {
     success: boolean;
@@ -13,8 +14,8 @@ export type UploadReturnType = Record<string, UploadInfo>;
 export type FormValues = {
     files: File[];
 };
-
-export const GalleryControlButton: FunctionComponent = () => {
+type Props = { mutate: MutatorCallback };
+export const GalleryControlButton: FunctionComponent<Props> = ({ mutate }) => {
     const classes: ClassNameMap = useGalleryButtonStyle();
     const { GalleryInformation, setOpen } = useGallerySnackbar();
     const { data, isLoading, error, ajax } = useAjax<UploadReturnType, FormData>('/fileManagement/upload.php');
@@ -55,6 +56,7 @@ export const GalleryControlButton: FunctionComponent = () => {
                 ajax(formData);
                 formik.resetForm();
                 setOpen(true);
+                mutate(undefined);
             }
         }
     });
