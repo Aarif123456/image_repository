@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { useGalleryButtonStyle, SubmitButton, ResetButton, useGallerySnackbar, GalleryExpectedFileInfo } from '../gallery';
+import { useGalleryButtonStyle, SubmitButton, ResetButton, useGallerySnackbar, GalleryExpectedFileInfo } from '.';
 import { Dropzone, useAjax, useAjaxComponent } from '../../common';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import { useFormik } from 'formik';
