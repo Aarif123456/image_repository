@@ -26,7 +26,6 @@ export const GalleryControlButton: FunctionComponent = () => {
     });
 
     console.error(error);
-    console.log(data);
     const validateFiles = (values: FormValues): File[] => {
         /* Quick validation here so we don't waste time getting an error in the back-end*/
         /* We have to make sure file name are unique*/
@@ -52,8 +51,6 @@ export const GalleryControlButton: FunctionComponent = () => {
             for (let key = 0; key < files.length; key++) {
                 formData.append('images[]', files[key]);
             }
-            console.log('form data');
-            console.log(formData);
             if (files.length > 0) {
                 ajax(formData);
                 formik.resetForm();

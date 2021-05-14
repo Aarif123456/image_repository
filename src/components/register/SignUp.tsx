@@ -39,9 +39,8 @@ export const SignUp: FunctionComponent = () => {
     });
 
     if (data !== undefined) {
-        const { message, id } = data;
+        const { id } = data;
         if (id > 0) {
-            console.log(message);
             history.push('/gallery');
         }
     }

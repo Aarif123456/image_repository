@@ -26,8 +26,6 @@ export const GallerySnackbar: FunctionComponent<GallerySnackbarProps> = ({ open,
     const fallbackError = 'of an internal server error';
     const [errorData, setErrorData] = useState<GalleryExpectedFileInfo>([]);
     const [successCount, setSuccessCount] = useState(0);
-    console.log('In GallerySnackbar ');
-    console.log(data);
 
     /* Whenever our data gets changed we change our info */
     useEffect(() => {
