@@ -55,19 +55,6 @@ export const GalleryControlButton: FunctionComponent = () => {
                 ajax(formData);
                 formik.resetForm();
                 setOpen(true);
-                alert(
-                    JSON.stringify(
-                        {
-                            files: values.files.map((file: File) => ({
-                                fileName: file.name,
-                                type: file.type,
-                                size: `${file.size ?? 0} bytes`
-                            }))
-                        },
-                        null,
-                        4
-                    )
-                );
             }
         }
     });
