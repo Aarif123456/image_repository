@@ -51,18 +51,23 @@ Front End (React), Back-end(PHP), Encryption (Java hosted on Google Cloud), Data
 * User Management
     * Allow users to register
     * Allow users to login
+    * Make sure user stays logged in after refreshing the page...
 * Upload
     * upload file to user's account
     * make sure file is encrypted
+    * Make sure users don't overwrite their file - eventually give them a prompt to confirm they are
+
+## Related Repository :detective:
+
+* [CP-ABE](https://github.com/Aarif123456/mCP-ABE_API/tree/cpabe) encryption used to encrypt files so even if a hacker got their hands on the file it would still be encrypted
+* [PHP Back-end](https://github.com/Aarif123456/image_repository_api)
 
 ## TODO :alarm_clock:
 * View
     * view files user has uploaded
-    * download chosen file - make sure it is the same as when u uploaded
+    * download chosen file - make sure it is the same as when you uploaded
     * view image in tile form (after)
-    * view files in folder (after)
-* Upload
-  Make sure users don't overwrite their file - eventually give them a prompt to confirm they are
+    * view files in folder (after)  
 * Delete
     * delete selected file - make sure user can only delete file in their folder
     * Test mass deletion (after)
@@ -70,29 +75,12 @@ Front End (React), Back-end(PHP), Encryption (Java hosted on Google Cloud), Data
 * File encryption
     * change permission of file
     * change permission of all files in folder (after)
-
 * User Management (after)
-    * Make sure user stays logged in after refreshing the page...
     * Allow user to logout
-
 * Searching (after)
     * Allow users to search public files by name
     * Allow users to search public files by tags
     * Allow users to search files in their organization
-
-* Create test cases - for php and react
-    * Test to make sure front-end can remember user
-* Create diagrams explaining what the system does and add explanation of how to build
-    * ER diagram
-    * System design diagram - how everything ties together
-    * Check out other read-me
-
-
-
-## Related Repository :detective:
-
-* [CP-ABE](https://github.com/Aarif123456/mCP-ABE_API/tree/cpabe) encryption used to encrypt files so even if a hacker got their hands on the file it would still be encrypted
-* [PHP Back-end](https://github.com/Aarif123456/image_repository_api)
 
 ## References :books:
 
