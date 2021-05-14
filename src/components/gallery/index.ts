@@ -1,6 +1,7 @@
 export * from './Gallery';
 export * from './GalleryControlButton';
 export * from './GalleryResetButton';
+export * from './GallerySnackbar';
 export * from './GalleryStyle';
 export * from './GallerySubmitButton';
 export * from './GalleryTable';
