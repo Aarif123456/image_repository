@@ -21,8 +21,8 @@ the [Shopify Developer Intern Challenge](https://docs.google.com/document/d/1ZKR
         * Users can choose what files they want to share with the world. This will become relevant when we add in the search functionalities 
 
 # How to use? :artificial_satellite:
-I recommend looking first checking out the live demo at: https://abdullaharif.tech/image_repository
-To run React locally clone this repository and run `npm start` and open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+I recommend looking first checking out the [live demo](https://abdullaharif.tech/image_repository) \
+To run locally, clone this repository and run `npm start`. Then open up [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 # Building :construction:
 
@@ -36,26 +36,26 @@ To run React locally clone this repository and run `npm start` and open [http://
 * **ESLint**: [ESLint](https://eslint.org/) is a static analyzer for JavaScript. In our code we also use it to ensure our translation json files are also in the correct format.
 * **Jest**: [Jest](https://jestjs.io/) is a simple, yet comprehensive testing framework which works well with React. 
 * **React-Intl**: [React-intl](https://formatjs.io/docs/react-intl/) is a JavaScript library that makes simplifies the process of internalization for web-applications.
-* **Formik**:[Formik](https://formik.org/docs/overview) is a light weight library that handles form creation and management in React.
+* **Formik**: [Formik](https://formik.org/docs/overview) is a light weight library that handles form creation and management in React.
 * **Axios**: [Axios](https://axios-http.com/) is a promise based HTTP client which simplifies the connecting to the API for this website. 
 * **Dropzone**: [Dropzone](https://react-dropzone.js.org/) is HTML5-compliant and drag and drop component for file uploading. It allows us to select multiple files at once and handles basic file validation.
 * **Material-UI**: [Material-UI](https://material-ui.com/) is a React library that implements [Google's Material Design](https://material.io/design). It lets quickly create beautiful components so we can focus more on the functionality.
-
-
-Front End (React), Back-end(PHP), Encryption (Java hosted on Google Cloud), Database(Maria DB [MySQL])
 
 ## DONE :star2:
 * File encryption
     * Fix CP-ABE repository to allow us set properties
     * Create function to create user attributes from their info
+    * View files user has uploaded
+
 * User Management
     * Allow users to register
     * Allow users to login
     * Make sure user stays logged in after refreshing the page...
+
 * Upload
-    * upload file to user's account
-    * make sure file is encrypted
-    * Make sure users don't overwrite their file - eventually give them a prompt to confirm they are
+    * Upload file to user's account
+    * Make sure file is encrypted
+    * Make sure users don't overwrite their file
 
 ## Related Repository :detective:
 
@@ -64,19 +64,22 @@ Front End (React), Back-end(PHP), Encryption (Java hosted on Google Cloud), Data
 
 ## TODO :alarm_clock:
 * View
-    * view files user has uploaded
-    * download chosen file - make sure it is the same as when you uploaded
-    * view image in tile form (after)
-    * view files in folder (after)  
+    * Download chosen file - make sure it is the same as when you uploaded
+    * View image in tile form (after)
+    * View files in folder (after)  
+  
 * Delete
-    * delete selected file - make sure user can only delete file in their folder
+    * Delete selected file - make sure user can only delete file in their folder
     * Test mass deletion (after)
-    * delete folder (after)
+    * Delete folder (after)
+  
 * File encryption
-    * change permission of file
-    * change permission of all files in folder (after)
+    * Change permission of file
+    * Change permission of all files in folder (after)
+  
 * User Management (after)
     * Allow user to logout
+  
 * Searching (after)
     * Allow users to search public files by name
     * Allow users to search public files by tags
