@@ -29,20 +29,20 @@ export const App: FunctionComponent = () => (
         <HashRouter hashType='noslash'>
             <Switch>
                 {/*
-                <Route exact path='forgotPassword''>
+                <Route exact path='/forgotPassword'>
                     <ForgotPasswordView />
                 </Route>
                 */}
-                <Route path={`${process.env.PUBLIC_URL}/gallery`}>
+                <Route path='/gallery'>
                     <GalleryView />
                 </Route>
-                <Route exact path={`${process.env.PUBLIC_URL}/login`}>
+                <Route exact path='/login'>
                     <LoginView />
                 </Route>
-                <Route exact path={`${process.env.PUBLIC_URL}/signup`}>
+                <Route exact path='/signup'>
                     <SignUpView />
                 </Route>
-                <Route exact path=''>
+                <Route exact path='/'>
                     <HomeView />
                 </Route>
                 <Route>
