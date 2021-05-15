@@ -21,7 +21,7 @@ export const FileManagementButtonGroup: FunctionComponent<TableData> = ({ fileNa
             </IconButton>
             <IconButton
                 onClick={() => {
-                    alert(`Will trigger a download of the ${fileName} file`);
+                    alert(`Will delete the ${fileName} file`);
                 }}
                 aria-label={intl.formatMessage({
                     id: 'FileManagement.delete'

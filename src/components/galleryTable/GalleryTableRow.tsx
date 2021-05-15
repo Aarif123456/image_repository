@@ -5,7 +5,7 @@ import { DateTime } from 'luxon';
 /* Used for the search button Icon used to go to the appropriate session timeline */
 
 interface GalleryTableRowProps {
-    handleClick: (event: MouseEvent<HTMLTableRowElement>, id: number) => void;
+    handleClick: (event: MouseEvent<HTMLTableHeaderCellElement | HTMLTableDataCellElement>, id: number) => void;
     isItemSelected: boolean;
     labelId: string;
     row: TableData;
@@ -27,34 +27,25 @@ function dateToString(dt: DateTime) {
     return dt.toLocaleString(DateTime.DATETIME_FULL);
 }
 /* Create the table row  */
-export const GalleryTableRow: FunctionComponent<GalleryTableRowProps> = ({ handleClick, isItemSelected, labelId, row }) => {
-    return (
-        <TableRow
-            hover
-            onClick={(event) => handleClick(event, row.fileID)}
-            role='checkbox'
-            aria-checked={isItemSelected}
-            tabIndex={-1}
-            key={row.fileID}
-            selected={isItemSelected}>
-            <TableCell padding='checkbox'>
-                <Checkbox checked={isItemSelected} inputProps={{ 'aria-labelledby': labelId }} />
-            </TableCell>
-            <TableCell align='left' padding='none'>
-                {row.fileName}
-            </TableCell>
-            <TableCell align='left' padding='none'>
-                {formatBytes(row.fileSize)}
-            </TableCell>
-            <TableCell align='left' padding='none'>
-                {row.filePath}
-            </TableCell>
-            <TableCell align='left' padding='none'>
-                {dateToString(row.uploaded)}
-            </TableCell>
-            <TableCell align='left' padding='none'>
-                <FileManagementButtonGroup {...row} />
-            </TableCell>
-        </TableRow>
-    );
-};
+export const GalleryTableRow: FunctionComponent<GalleryTableRowProps> = ({ handleClick, isItemSelected, labelId, row }) => (
+    <TableRow hover role='checkbox' aria-checked={isItemSelected} tabIndex={-1} key={row.fileID} selected={isItemSelected}>
+        <TableCell padding='checkbox' onClick={(event) => handleClick(event, row.fileID)}>
+            <Checkbox checked={isItemSelected} inputProps={{ 'aria-labelledby': labelId }} />
+        </TableCell>
+        <TableCell align='left' padding='none'>
+            {row.fileName}
+        </TableCell>
+        <TableCell align='left' padding='none'>
+            {formatBytes(row.fileSize)}
+        </TableCell>
+        <TableCell align='left' padding='none'>
+            {row.filePath}
+        </TableCell>
+        <TableCell align='left' padding='none'>
+            {dateToString(row.uploaded)}
+        </TableCell>
+        <TableCell align='left' padding='none'>
+            <FileManagementButtonGroup {...row} />
+        </TableCell>
+    </TableRow>
+);
