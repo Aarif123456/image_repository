@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import { HomeView } from './home';
 import { LoginView } from './login';
 import { SignUpView } from './register';
 import { GalleryView } from './gallery';
 /* Import the pages of the website */
-import { NotFound } from '../common/errorHandling';
+import { NotFound } from '../common';
 /* Import to control the color scheme like dark mode */
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -26,29 +26,29 @@ const darkTheme = createMuiTheme({
 export const App: FunctionComponent = () => (
     <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <BrowserRouter>
+        <HashRouter hashType='noslash'>
             <Switch>
                 {/*
-                <Route exact path='/forgotPassword'>
+                <Route exact path='forgotPassword''>
                     <ForgotPasswordView />
                 </Route>
                 */}
-                <Route path='/gallery'>
+                <Route path={`${process.env.PUBLIC_URL}/gallery`}>
                     <GalleryView />
                 </Route>
-                <Route exact path='/login'>
+                <Route exact path={`${process.env.PUBLIC_URL}/login`}>
                     <LoginView />
                 </Route>
-                <Route exact path='/signup'>
+                <Route exact path={`${process.env.PUBLIC_URL}/signup`}>
                     <SignUpView />
                 </Route>
-                <Route exact path='/'>
+                <Route exact path=''>
                     <HomeView />
                 </Route>
                 <Route>
                     <NotFound />
                 </Route>
             </Switch>
-        </BrowserRouter>
+        </HashRouter>
     </ThemeProvider>
 );

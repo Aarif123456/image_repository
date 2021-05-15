@@ -41,7 +41,7 @@ export const SignUp: FunctionComponent = () => {
     if (data !== undefined) {
         const { id } = data;
         if (id > 0) {
-            history.push('/gallery');
+            history.push('gallery');
         }
     }
 

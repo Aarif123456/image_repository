@@ -21,7 +21,7 @@ the [Shopify Developer Intern Challenge](https://docs.google.com/document/d/1ZKR
         * Users can choose what files they want to share with the world. This will become relevant when we add in the search functionalities 
 
 # How to use? :artificial_satellite:
-I recommend looking first checking out the live demo at: https://arif115.myweb.cs.uwindsor.ca/imagerepository/docs
+I recommend looking first checking out the live demo at: https://abdullaharif.tech/image_repository
 To run React locally clone this repository and run `npm start` and open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 # Building :construction:
