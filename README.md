@@ -1,3 +1,8 @@
+[![MIT license](https://img.shields.io/github/license/Aarif123456/image_repository?style=for-the-badge)](https://lbesson.mit-license.org/) 
+![lines of code](https://img.shields.io/tokei/lines/github/Aarif123456/image_repository?style=for-the-badge) 
+![Vulnerability count](https://img.shields.io/snyk/vulnerabilities/github/Aarif123456/image_repository?style=for-the-badge)
+[![BCH compliance](https://bettercodehub.com/edge/badge/Aarif123456/image_repository?branch=main)](https://bettercodehub.com/)
+
 # Image Repository
 
 # What is this? 🤔
@@ -5,7 +10,10 @@ This is an image repository created for
 the [Shopify Developer Intern Challenge](https://docs.google.com/document/d/1ZKRywXQLZWOqVOHC4JkF3LqdpO3Llpfk_CkZPR8bjak)
 
 # Quick Start :rocket:
-## Features
+I recommend looking first checking out the [live demo](https://abdullaharif.tech/image_repository) \
+To run locally, clone this repository and run `npm start`. Then open up [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+# Features :eyes:
 
     Add images
         * Upload images one at a time or in bulk
@@ -20,13 +28,10 @@ the [Shopify Developer Intern Challenge](https://docs.google.com/document/d/1ZKR
     File management
         * Users can choose what files they want to share with the world. This will become relevant when we add in the search functionalities 
 
-# How to use? :artificial_satellite:
-I recommend looking first checking out the [live demo](https://abdullaharif.tech/image_repository) \
-To run locally, clone this repository and run `npm start`. Then open up [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 # Building :construction:
 
-## System Architecture 
+## System Architecture :european_castle:
 ![System Context Diagram](https://i.imgur.com/edeuHA6.png)
 
 ## Technology stack :gear:
