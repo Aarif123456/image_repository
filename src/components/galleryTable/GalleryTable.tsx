@@ -65,9 +65,13 @@ export const GalleryTable: FunctionComponent<FetchComponentProps<FileApiReturnDa
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
     /******************* Variables *******************/
-    const rows: TableData[] = data.map((fd: FileData) => {
-        return createData(fd.fileID, fd.fileName, fd.fileSize, fd.uploaded, fd.filePath, fd.mime, fd.accessID);
-    });
+
+    const rows: TableData[] =
+        'error' in data
+            ? []
+            : data.map((fd: FileData) => {
+                  return createData(fd.fileID, fd.fileName, fd.fileSize, fd.uploaded, fd.filePath, fd.mime, fd.accessID);
+              });
     console.log(rows);
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
