@@ -2,6 +2,7 @@
     "DragZone.acceptedPrompt": "Your file has been added!",
     "DragZone.dragPrompt": "Drag 'n' drop some files here, or click to select files",
     "DragZone.fileTypePrompt": "Only images will be accepted",
+    "DragZone.initialDragPrompt": "Try dragging a file here!",
     "DragZone.rejectedPrompt": "This file is not authorized",
     "Error.404.errorBody": "Error 404",
     "Error.404.greeting": "Hello!",

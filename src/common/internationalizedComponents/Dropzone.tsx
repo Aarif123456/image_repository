@@ -59,9 +59,13 @@ export const Dropzone: FunctionComponent<DropzoneProps> = ({ onDropHandler, file
                     <FormattedMessage id='DragZone.rejectedPrompt' />
                 </p>
             )}
-            {(files ?? []).length === 0 && <p>Try dragging a file here!</p>}
+            {(files ?? []).length === 0 && (
+                <p>
+                    <FormattedMessage id='DragZone.initialDragPrompt' />
+                </p>
+            )}
             {(files ?? []).map((file: File, i: number) => (
-                <Thumbs index={i} imageFile={file} imageTitle={`Title.${i}`} />
+                <Thumbs key={`Image.${i}`} index={i} imageFile={file} imageTitle={`Title.${i}`} />
             ))}
             <em>
                 <FormattedMessage id='DragZone.fileTypePrompt' />
