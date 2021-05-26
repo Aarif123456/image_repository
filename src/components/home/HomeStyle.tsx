@@ -9,7 +9,13 @@ export const useHomeStyles = makeStyles(
             },
             mainButtons: {
                 minWidth: '30%'
-            },
+            }
+        })
+);
+
+export const useBackgroundStyle = makeStyles(
+    (): StyleRules =>
+        createStyles({
             backgroundContainer: {
                 backgroundImage: `url(${backgroundImage})`,
                 backgroundPosition: 'center',
