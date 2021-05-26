@@ -1,6 +1,6 @@
 module.exports = {
     preset: 'ts-jest',
-    testMatch: ['<rootDir>/test/**/*.test.ts', '<rootDir>/test/**/*.test.tsx'],
+    testMatch: ['<rootDir>/tests/**/*.test.{ts,tsx}'],
     collectCoverage: true,
     collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}', '!<rootDir>/src/**/*.d.ts'],
     moduleNameMapper: {
