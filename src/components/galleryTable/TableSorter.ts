@@ -1,5 +1,5 @@
 /* From https://github.com/mui-org/material-ui/blob/master/docs/src/pages/components/tables/EnhancedTable.tsx */
-import { TableData } from './GalleryTable';
+import { TableData } from './TableData';
 import { DateTime } from 'luxon';
 
 export type Order = 'asc' | 'desc';

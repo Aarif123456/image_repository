@@ -1,39 +1,21 @@
 import { useState, ChangeEvent, MouseEvent, FunctionComponent } from 'react';
 import { Table, TableBody, TableCell, TableRow, TableContainer, TablePagination, Paper, FormControlLabel, Switch } from '@material-ui/core';
-import { GalleryTableHead, getComparator, stableSort, Order, HeadCell, GalleryTableToolbar, useGalleryTableStyle } from '../galleryTable';
+import {
+    createData,
+    GalleryTableHead,
+    getComparator,
+    stableSort,
+    Order,
+    HeadCell,
+    GalleryTableToolbar,
+    TableData,
+    useGalleryTableStyle
+} from '../galleryTable';
 import { GalleryTableRow } from '../galleryTableRow';
 import { useIntl } from 'react-intl';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
-import { DateTime } from 'luxon';
 import { FetchComponentProps } from '../../common';
 import { FileApiReturnData, FileData } from '../gallery';
-
-/* TODO: figure out how to incorporate folders as well */
-export interface TableData {
-    fileID: number;
-    fileName: string;
-    fileSize: number;
-    /* When the file was first uploaded */
-    uploaded: DateTime;
-    /* Folder */
-    filePath: string;
-    /* type of file*/
-    mime: string;
-    accessID: number;
-}
-
-function createData(
-    fileID: number,
-    fileName: string,
-    fileSize: number,
-    uploadedDtString: string,
-    filePath: string,
-    mime: string,
-    accessID: number
-): TableData {
-    const uploaded = DateTime.fromSQL(uploadedDtString);
-    return { fileID, fileName, fileSize, filePath, uploaded, mime, accessID };
-}
 
 const headCells: HeadCell<TableData>[] = [
     { id: 'fileName', numeric: false },

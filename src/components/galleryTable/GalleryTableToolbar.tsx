@@ -31,7 +31,8 @@ export const GalleryTableToolbar: FunctionComponent<GalleryTableToolbarProps> = 
             )}
             {numSelected > 0 && (
                 <Tooltip title='Delete'>
-                    <IconButton aria-label='delete' 
+                    <IconButton
+                        aria-label='delete'
                         onClick={() => {
                             alert(`Will delete of the files with the following IDs: ${selected.join()} `);
                         }}>
