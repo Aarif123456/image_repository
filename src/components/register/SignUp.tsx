@@ -29,7 +29,7 @@ export const SignUp: FunctionComponent = () => {
         }
     });
 
-    const { data, isLoading, error, ajax } = useAjax<SignupApiReturn, FormValues>('/userManagement/addUser');
+    const { data, isLoading, error, ajax } = useAjax<SignupApiReturn, FormValues>('/UserManagement/register');
     const { AjaxComponent } = useAjaxComponent<SignupApiReturn>({
         SuccessComponent: SignupMessage,
         ErrorComponent: SimpleErrorMessage,

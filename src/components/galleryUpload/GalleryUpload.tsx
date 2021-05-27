@@ -14,7 +14,7 @@ export type FormValues = {
 export const GalleryControlButton: FunctionComponent = () => {
     const classes: ClassNameMap = useGalleryButtonStyle();
     const { GalleryInformation, setOpen } = useGallerySnackbar();
-    const { data, isLoading, error, ajax } = useAjax<UploadReturnType, FormData>('/fileManagement/upload.php');
+    const { data, isLoading, error, ajax } = useAjax<UploadReturnType, FormData>('/FileManagement/upload.php');
     const { AjaxComponent } = useAjaxComponent<GalleryExpectedFileInfo>({
         SuccessComponent: GalleryInformation,
         data: data !== undefined ? Object.entries(data) : undefined,

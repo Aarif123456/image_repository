@@ -25,11 +25,11 @@ export const Login: FunctionComponent = () => {
             ajax(values as FormValues);
         }
     });
-    const { data, isLoading, error, ajax } = useAjax<LoginApiReturn, FormValues>('/userManagement/loginUser');
+    const { data, isLoading, ajax } = useAjax<LoginApiReturn, FormValues>('/UserManagement/login');
 
     if (data !== undefined) {
-        const { loggedIn } = data;
-        if (loggedIn) {
+        const { error } = data;
+        if (!error) {
             history.push('/gallery');
         }
     }
@@ -37,7 +37,6 @@ export const Login: FunctionComponent = () => {
     if (isLoading) {
         return (
             <Backdrop className={classes.backdrop} open={true}>
-                {' '}
                 <ProgressCircle />{' '}
             </Backdrop>
         );
@@ -89,7 +88,7 @@ export const Login: FunctionComponent = () => {
                     </Grid>
                 </Grid>
                 <Grid container justify='flex-start'>
-                    <LoginMessage message={data !== undefined ? data.message : error !== undefined ? error.error : ''} />
+                    <LoginMessage message={data?.message ?? ''} />
                 </Grid>
             </form>
         </div>

@@ -27,7 +27,7 @@ export const Gallery: FunctionComponent = () => {
     /* Different folder will have different files */
     const curFolder = '';
 
-    const { data, isLoading, error } = useSwrAjax<FileApiReturnData, FileApiArguments>('fileManagement/getFolderImages', {
+    const { data, isLoading, error } = useSwrAjax<FileApiReturnData, FileApiArguments>('FileManagement/folderImages', {
         filePath: curFolder
     });
     const { AjaxComponent } = useAjaxComponent<FileApiReturnData>({
