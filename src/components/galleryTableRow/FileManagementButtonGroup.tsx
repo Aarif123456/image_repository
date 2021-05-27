@@ -1,13 +1,14 @@
 import { FunctionComponent } from 'react';
-import { TableData } from '.';
+import { TableData } from '../galleryTable';
+import { useDeleteButton } from '.';
 import { useIntl } from 'react-intl';
 import { IconButton, ButtonGroup } from '@material-ui/core';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
-import DeleteIcon from '@material-ui/icons/Delete';
 
-export const FileManagementButtonGroup: FunctionComponent<TableData> = ({ fileName }) => {
-    /* TODO: make button call endpoint that triggers a download*/
+export const FileManagementButtonGroup: FunctionComponent<TableData> = (rowData) => {
     const intl = useIntl();
+    const { fileName, fileID } = rowData;
+    const { deleted, DeleteButton } = useDeleteButton({ fileID });
     return (
         <ButtonGroup>
             <IconButton
@@ -19,15 +20,7 @@ export const FileManagementButtonGroup: FunctionComponent<TableData> = ({ fileNa
                 })}>
                 <CloudDownloadIcon />
             </IconButton>
-            <IconButton
-                onClick={() => {
-                    alert(`Will delete the ${fileName} file`);
-                }}
-                aria-label={intl.formatMessage({
-                    id: 'FileManagement.delete'
-                })}>
-                <DeleteIcon />
-            </IconButton>
+            {!deleted && <DeleteButton />}
         </ButtonGroup>
     );
 };

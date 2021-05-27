@@ -1,15 +1,7 @@
 import { useState, ChangeEvent, MouseEvent, FunctionComponent } from 'react';
 import { Table, TableBody, TableCell, TableRow, TableContainer, TablePagination, Paper, FormControlLabel, Switch } from '@material-ui/core';
-import {
-    GalleryTableHead,
-    GalleryTableRow,
-    getComparator,
-    stableSort,
-    Order,
-    HeadCell,
-    GalleryTableToolbar,
-    useGalleryTableStyle
-} from '../galleryTable';
+import { GalleryTableHead, getComparator, stableSort, Order, HeadCell, GalleryTableToolbar, useGalleryTableStyle } from '../galleryTable';
+import { GalleryTableRow } from '../galleryTableRow';
 import { useIntl } from 'react-intl';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import { DateTime } from 'luxon';
@@ -72,7 +64,6 @@ export const GalleryTable: FunctionComponent<FetchComponentProps<FileApiReturnDa
             : data.map((fd: FileData) => {
                   return createData(fd.fileID, fd.fileName, fd.fileSize, fd.uploaded, fd.filePath, fd.mime, fd.accessID);
               });
-    console.log(rows);
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
     const handleRequestSort = (_event: MouseEvent<unknown>, property: keyof TableData) => {

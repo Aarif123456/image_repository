@@ -1,8 +1,8 @@
 import { FunctionComponent, MouseEvent } from 'react';
-import { FileManagementButtonGroup, TableData } from '.';
+import { FileManagementButtonGroup } from '.';
+import { TableData } from '../galleryTable';
 import { Checkbox, TableCell, TableRow } from '@material-ui/core';
 import { DateTime } from 'luxon';
-/* Used for the search button Icon used to go to the appropriate session timeline */
 
 interface GalleryTableRowProps {
     handleClick: (event: MouseEvent<HTMLTableHeaderCellElement | HTMLTableDataCellElement>, id: number) => void;
@@ -26,6 +26,7 @@ function formatBytes(bytes: number, decimals = 2): string {
 function dateToString(dt: DateTime) {
     return dt.toLocaleString(DateTime.DATETIME_FULL);
 }
+
 /* Create the table row  */
 export const GalleryTableRow: FunctionComponent<GalleryTableRowProps> = ({ handleClick, isItemSelected, labelId, row }) => (
     <TableRow hover role='checkbox' aria-checked={isItemSelected} tabIndex={-1} key={row.fileID} selected={isItemSelected}>
