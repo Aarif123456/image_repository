@@ -37,7 +37,7 @@ export const Login: FunctionComponent = () => {
     if (isLoading) {
         return (
             <Backdrop className={classes.backdrop} open={true}>
-                <ProgressCircle />{' '}
+                <ProgressCircle />
             </Backdrop>
         );
     }
