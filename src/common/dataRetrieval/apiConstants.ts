@@ -3,9 +3,9 @@ import axios, { AxiosInstance } from 'axios';
 function getAPI() {
     switch (process.env.NODE_ENV) {
         case 'development':
-            return 'http://localhost:4000';
+            return 'https://arif115.myweb.cs.uwindsor.ca/imagerepository/beta/src/api/';
         case 'test':
-            return 'http://localhost:4000';
+            return 'http://localhost:4000/src/api/';
         case 'production':
             return 'https://arif115.myweb.cs.uwindsor.ca/imagerepository/api/';
     }

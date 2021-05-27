@@ -16,5 +16,5 @@ export const Thumbs: FunctionComponent<ThumbProps> = ({ index, imageFile, imageT
         false
     );
     reader.readAsDataURL(imageFile);
-    return <img src={imageUrl} key={`image.${index}`} alt={imageTitle} className='img-thumbnail mt-2' height={200} width={200} />;
+    return <img src={imageUrl} key={`image.${index}`} alt={imageTitle} height={200} width={200} />;
 };

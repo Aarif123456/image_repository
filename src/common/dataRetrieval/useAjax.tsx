@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { AxiosResponse } from 'axios';
 import { AXIOS_ENDPOINT } from './apiConstants';
 
-export type ErrorType = { error: string } | undefined;
+export type ErrorType = { error: boolean; message?: string } | undefined;
 export type AjaxType<T, Y> = {
     error: ErrorType;
     isLoading: boolean;
@@ -25,13 +25,13 @@ export function ajaxCall<T, Y>(
             const result: ReturnType<T> = response.data;
             setLoading(false);
             setData(result as T);
-            if (result !== undefined && 'error' in result) {
-                setError({ error: result.error });
+            if (result && 'error' in result && result.error) {
+                setError(result as ErrorType);
             }
         })
         .catch((error): void => {
             if ((error as Error) !== undefined) {
-                const e: ErrorType = { error: (error as Error).message ?? 'Unknown error' };
+                const e: ErrorType = { error: true, message: (error as Error)?.message ?? 'Unknown error' };
                 setError(e);
                 setLoading(false);
             }

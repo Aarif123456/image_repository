@@ -13,9 +13,9 @@ export const useSwrAjax = <T, Y>(endpoint: string, args?: Y): useAjaxReturn<T, Y
     const [error, setError] = useState<ErrorType>(undefined as ErrorType);
     useEffect(() => {
         if (swrError && 'message' in swrError) {
-            setError({ error: (swrError as Error).message });
-        } else if (data !== undefined && 'error' in data) {
-            setError({ error: data.error });
+            setError({ error: true, message: (swrError as Error).message });
+        } else if (data && 'error' in data && data.error) {
+            setError(data as ErrorType);
         }
     }, [data, swrError]);
 

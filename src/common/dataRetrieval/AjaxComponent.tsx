@@ -22,8 +22,8 @@ export function useAjaxComponent<T>(props: Props<T> & { children?: ReactNode }):
     const intl = useIntl();
     const AjaxComponent: FunctionComponent = () => {
         /*If component is not ready to call then we just return a placeholder */
-        if (error !== undefined && error.error !== undefined) {
-            return <ErrorComponent errorMessage={error?.error} />;
+        if (error?.error) {
+            return <ErrorComponent errorMessage={error?.message} />;
         }
         if (isLoading) {
             return <LoadingComponent />;
