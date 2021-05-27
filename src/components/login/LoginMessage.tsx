@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
 export type LoginApiReturn = {
-    loggedIn: boolean;
+    error: boolean;
     message: string;
 };
 
