@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, MouseEvent, FunctionComponent } from 'react';
-import { Table, TableBody, TableCell, TableRow, TableContainer, TablePagination, Paper, FormControlLabel, Switch } from '@material-ui/core';
+import { Table, TableBody, TableCell, TableRow, TableContainer, Paper, FormControlLabel, Switch } from '@material-ui/core';
 import {
     createData,
     GalleryTableHead,
@@ -9,7 +9,8 @@ import {
     HeadCell,
     GalleryTableToolbar,
     TableData,
-    useGalleryTableStyle
+    useGalleryTableStyle,
+    useTablePagination
 } from '../galleryTable';
 import { GalleryTableRow } from '../galleryTableRow';
 import { useIntl } from 'react-intl';
@@ -34,9 +35,7 @@ export const GalleryTable: FunctionComponent<FetchComponentProps<FileApiReturnDa
     /* By default sort by image name */
     const [orderBy, setOrderBy] = useState<keyof TableData>('fileName');
     const [selected, setSelected] = useState<number[]>([]);
-    const [page, setPage] = useState(0);
     const [dense, setDense] = useState(false);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
 
     /******************* Variables *******************/
 
@@ -46,7 +45,6 @@ export const GalleryTable: FunctionComponent<FetchComponentProps<FileApiReturnDa
             : data.map((fd: FileData) => {
                   return createData(fd.fileID, fd.fileName, fd.fileSize, fd.uploaded, fd.filePath, fd.mime, fd.accessID);
               });
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
     const handleRequestSort = (_event: MouseEvent<unknown>, property: keyof TableData) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -81,20 +79,13 @@ export const GalleryTable: FunctionComponent<FetchComponentProps<FileApiReturnDa
         setSelected(newSelected);
     };
 
-    const handleChangePage = (_event: unknown, newPage: number) => {
-        setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-    };
-
     const handleChangeDense = (event: ChangeEvent<HTMLInputElement>) => {
         setDense(event.target.checked);
     };
 
     const isSelected = (id: number) => selected.indexOf(id) !== -1;
+
+    const { emptyRows, startIndex, endIndex, TablePagination } = useTablePagination(rows.length);
 
     return (
         <div className={classes.root}>
@@ -120,7 +111,7 @@ export const GalleryTable: FunctionComponent<FetchComponentProps<FileApiReturnDa
                         />
                         <TableBody>
                             {stableSort(rows, getComparator(order, orderBy))
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                .slice(startIndex, endIndex)
                                 .map((row: TableData, index: number) => {
                                     const isItemSelected = isSelected(row.fileID);
                                     return (
@@ -141,15 +132,7 @@ export const GalleryTable: FunctionComponent<FetchComponentProps<FileApiReturnDa
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
-                    component='div'
-                    count={rows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                />
+                <TablePagination />
             </Paper>
             <FormControlLabel control={<Switch checked={dense} onChange={handleChangeDense} />} label='Dense padding' />
         </div>
