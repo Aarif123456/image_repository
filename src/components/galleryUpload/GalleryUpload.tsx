@@ -13,18 +13,19 @@ export type FormValues = {
 
 export const GalleryControlButton: FunctionComponent = () => {
     const classes: ClassNameMap = useGalleryButtonStyle();
-    const { GalleryInformation, setOpen } = useGallerySnackbar();
-    const { data, isLoading, error, ajax } = useAjax<UploadReturnType, FormData>('/FileManagement/upload.php');
+    const { GallerySnackbar, setOpen } = useGallerySnackbar();
+    const { data, isLoading, error, ajax } = useAjax<UploadReturnType, FormData>('/FileManagement/upload');
     const { AjaxComponent } = useAjaxComponent<GalleryExpectedFileInfo>({
-        SuccessComponent: GalleryInformation,
+        SuccessComponent: GallerySnackbar,
         data: data !== undefined ? Object.entries(data) : undefined,
         isLoading,
         error
     });
 
     const validateFiles = (values: FormValues): File[] => {
-        /* Quick validation here so we don't waste time getting an error in the back-end*/
-        /* We have to make sure file name are unique*/
+        /* Quick validation here so we don't waste time getting an error in the back-end
+         * We have to make sure file name are unique
+         */
         const files: File[] = [];
         const map = new Map<string, boolean>();
         for (const file of values.files) {
@@ -72,7 +73,7 @@ export const GalleryControlButton: FunctionComponent = () => {
                     <>
                         <Dropzone onDropHandler={onDropHandler} files={formik.values.files ?? []} />
                         <SubmitButton />
-                        <ResetButton resetForm={formik.resetForm} />{' '}
+                        <ResetButton resetForm={formik.resetForm} />
                     </>
                 )}
                 <AjaxComponent />

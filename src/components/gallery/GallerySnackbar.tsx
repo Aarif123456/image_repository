@@ -5,8 +5,8 @@ import { FetchComponentProps } from '../../common';
 import { FormattedMessage } from 'react-intl';
 
 export type OperationInfo = {
-    success: boolean;
-    error?: string;
+    error: boolean;
+    message?: string;
 };
 
 function Alert(props: AlertProps) {
@@ -23,7 +23,7 @@ interface GallerySnackbarProps extends FetchComponentProps<GalleryExpectedFileIn
 
 export type GalleryHookReturn = {
     setOpen: (open: boolean) => void;
-    GalleryInformation: FunctionComponent<FetchComponentProps<GalleryExpectedFileInfo>>;
+    GallerySnackbar: FunctionComponent<FetchComponentProps<GalleryExpectedFileInfo>>;
 };
 export const GallerySnackbar: FunctionComponent<GallerySnackbarProps> = ({ open, data, handleClose }) => {
     /*NOTE: this should be used - might be better to just use a defaultFallback from FormattedMessage*/
@@ -33,8 +33,8 @@ export const GallerySnackbar: FunctionComponent<GallerySnackbarProps> = ({ open,
 
     /* Whenever our data gets changed we change our info */
     useEffect(() => {
-        setErrorData(data.filter(([_filename, operationInfo]) => !operationInfo.success));
-        setSuccessCount(data.filter(([_filename, operationInfo]) => operationInfo.success).length);
+        setErrorData(data.filter(([_filename, operationInfo]) => operationInfo.error));
+        setSuccessCount(data.filter(([_filename, operationInfo]) => !operationInfo.error).length);
     }, [data]);
 
     /* Don't react to empty requests. NOTE: it might make sense to use an info box to gently
@@ -74,7 +74,7 @@ export const GallerySnackbar: FunctionComponent<GallerySnackbarProps> = ({ open,
                                 <b>
                                     <FormattedMessage
                                         id='FileManagement.uploadedFailureInfo'
-                                        values={{ filename, errorMessage: operationInfo.error ?? fallbackError }}
+                                        values={{ filename, errorMessage: operationInfo.message ?? fallbackError }}
                                     />{' '}
                                 </b>
                             </p>
@@ -104,6 +104,6 @@ export function useGallerySnackbar(): GalleryHookReturn {
 
     return {
         setOpen,
-        GalleryInformation
+        GallerySnackbar: GalleryInformation
     };
 }
