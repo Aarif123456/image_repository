@@ -10,7 +10,6 @@ interface GalleryTableToolbarProps {
     selected: number[];
 }
 
-/* TODO: Typography should have a formatted message child*/
 export const GalleryTableToolbar: FunctionComponent<GalleryTableToolbarProps> = ({ selected }) => {
     const classes: ClassNameMap = useToolbarStyles();
     const numSelected = selected.length;
