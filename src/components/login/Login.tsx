@@ -1,7 +1,16 @@
 import { FunctionComponent } from 'react';
-import { Link, TextField, useAjax, ProgressCircle } from '../../common';
-import { FormValues, getValidationSchema, useLoginStyles, SubmitButton, LoginHeader, LoginApiReturn, LoginMessage } from '../login';
-import { Backdrop, Checkbox, FormControlLabel, Grid } from '@material-ui/core';
+import { Link, TextField, useAjax } from '../../common';
+import {
+    FormValues,
+    getValidationSchema,
+    useLoginStyles,
+    SubmitButton,
+    LoginHeader,
+    LoginApiReturn,
+    LoginMessage,
+    LoginProgressCircle
+} from '../login';
+import { Checkbox, FormControlLabel, Grid } from '@material-ui/core';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import { useFormik } from 'formik';
 import { useIntl } from 'react-intl';
@@ -20,7 +29,7 @@ export const Login: FunctionComponent = () => {
             password: '',
             remember: false
         }),
-        validationSchema: validationSchema,
+        validationSchema,
         onSubmit: (values) => {
             ajax(values as FormValues);
         }
@@ -35,11 +44,7 @@ export const Login: FunctionComponent = () => {
     }
 
     if (isLoading) {
-        return (
-            <Backdrop className={classes.backdrop} open={true}>
-                <ProgressCircle />
-            </Backdrop>
-        );
+        return <LoginProgressCircle />;
     }
 
     /* Manage form data then pass it to the submit button */

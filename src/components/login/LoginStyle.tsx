@@ -12,14 +12,19 @@ export const useLoginStyles = makeStyles(
             form: {
                 width: '100%', // Fix IE 11 issue.
                 marginTop: theme.spacing(3)
-            },
+            }
+        })
+);
+
+export const useLoginLoadingStyles = makeStyles(
+    (theme): StyleRules =>
+        createStyles({
             backdrop: {
                 zIndex: theme.zIndex.drawer + 1,
                 color: '#fff'
             }
         })
 );
-
 export const useLoginHeaderStyles = makeStyles(
     (theme): StyleRules =>
         createStyles({
