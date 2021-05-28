@@ -1,12 +1,12 @@
 import { useState, ChangeEvent, MouseEvent, FunctionComponent } from 'react';
-import { Table, TableBody, TableCell, TableRow, TableContainer, Paper, FormControlLabel, Switch } from '@material-ui/core';
+import { Table, TableBody, TableContainer, Paper, FormControlLabel, Switch } from '@material-ui/core';
 import {
     createData,
+    EmptyRow,
     GalleryTableHead,
     getComparator,
     stableSort,
     Order,
-    HeadCell,
     GalleryTableToolbar,
     TableData,
     useGalleryTableStyle,
@@ -17,13 +17,6 @@ import { useIntl } from 'react-intl';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import { FetchComponentProps } from '../../common';
 import { FileApiReturnData, FileData } from '../gallery';
-
-const headCells: HeadCell<TableData>[] = [
-    { id: 'fileName', numeric: false },
-    { id: 'fileSize', numeric: true },
-    { id: 'filePath', numeric: false },
-    { id: 'uploaded', numeric: false }
-];
 
 export const GalleryTable: FunctionComponent<FetchComponentProps<FileApiReturnData>> = ({ data }) => {
     /******************* Hooks*******************/
@@ -106,35 +99,30 @@ export const GalleryTable: FunctionComponent<FetchComponentProps<FileApiReturnDa
                             order={order}
                             orderBy={orderBy}
                             rowCount={rows.length}
-                            headCells={headCells}
                             intl={intl}
                         />
                         <TableBody>
                             {stableSort(rows, getComparator(order, orderBy))
                                 .slice(startIndex, endIndex)
-                                .map((row: TableData, index: number) => {
-                                    const isItemSelected = isSelected(row.fileID);
-                                    return (
-                                        <GalleryTableRow
-                                            row={row}
-                                            labelId={`gallery-${index}`}
-                                            isItemSelected={isItemSelected}
-                                            handleClick={handleClick}
-                                            key={row.fileID}
-                                        />
-                                    );
-                                })}
-                            {emptyRows > 0 && (
-                                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                                    <TableCell colSpan={6} />
-                                </TableRow>
-                            )}
+                                .map((row: TableData, index: number) => (
+                                    <GalleryTableRow
+                                        row={row}
+                                        labelId={`gallery-${index}`}
+                                        isItemSelected={isSelected(row.fileID)}
+                                        handleClick={handleClick}
+                                        key={row.fileID}
+                                    />
+                                ))}
+                            {emptyRows > 0 && <EmptyRow emptyRows={emptyRows} dense={dense} />}
                         </TableBody>
                     </Table>
                 </TableContainer>
                 <TablePagination />
             </Paper>
-            <FormControlLabel control={<Switch checked={dense} onChange={handleChangeDense} />} label='Dense padding' />
+            <FormControlLabel
+                control={<Switch checked={dense} onChange={handleChangeDense} />}
+                label={intl.formatMessage({ id: 'Gallery.Table.paddingSwitch' })}
+            />
         </div>
     );
 };

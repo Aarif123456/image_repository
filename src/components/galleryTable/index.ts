@@ -1,3 +1,4 @@
+export * from './EmptyRow';
 export * from './GalleryTable';
 export * from './GalleryTableHead';
 export * from './GalleryTableStyle';
@@ -5,3 +6,4 @@ export * from './GalleryTableToolbar';
 export * from './TableData';
 export * from './TablePagination';
 export * from './TableSorter';
+export * from './GalleryTableHeadTypes';

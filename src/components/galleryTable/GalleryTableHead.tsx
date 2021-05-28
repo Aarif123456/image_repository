@@ -1,26 +1,14 @@
-import { ChangeEvent, FunctionComponent, MouseEvent } from 'react';
-import { Order, TableData, useTableHeadStyle } from '.';
+import { FunctionComponent, MouseEvent } from 'react';
+import { TableData, useTableHeadStyle, OnRequestSortParameter, GalleryTableProps, HeadCell } from '.';
 import { Checkbox, TableCell, TableHead, TableRow, TableSortLabel } from '@material-ui/core';
-import { IntlShape } from 'react-intl';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
-export interface HeadCell<T> {
-    numeric: boolean;
-    id: keyof T;
-}
 
-type OnRequestSortParameter<T> = (event: MouseEvent<HTMLButtonElement>, property: keyof T) => void;
-type OnSelectAllClickParameter = (event: ChangeEvent<HTMLInputElement>) => void;
-
-export interface GalleryTableProps<T> {
-    numSelected: number;
-    onRequestSort: OnRequestSortParameter<T>;
-    onSelectAllClick: OnSelectAllClickParameter;
-    order: Order;
-    orderBy: string;
-    rowCount: number;
-    intl: IntlShape;
-    headCells: HeadCell<T>[];
-}
+const headCells: HeadCell<TableData>[] = [
+    { id: 'fileName', numeric: false },
+    { id: 'fileSize', numeric: true },
+    { id: 'filePath', numeric: false },
+    { id: 'uploaded', numeric: false }
+];
 
 function createSortHandler<T>(property: keyof T, onRequestSort: OnRequestSortParameter<T>) {
     return (event: MouseEvent<HTMLButtonElement>): void => {
@@ -35,7 +23,6 @@ export const GalleryTableHead: FunctionComponent<GalleryTableProps<TableData>> =
     order,
     orderBy,
     rowCount,
-    headCells,
     intl
 }) => {
     const classes: ClassNameMap = useTableHeadStyle();

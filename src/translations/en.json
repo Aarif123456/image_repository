@@ -23,6 +23,7 @@
     "Gallery.Table.fileName": "Name",
     "Gallery.Table.filePath": "Folder",
     "Gallery.Table.fileSize": "Size",
+    "Gallery.Table.paddingSwitch": "Dense padding",
     "Gallery.Table.selected": "{numSelected} selected",
     "Gallery.Table.title": "Gallery Table",
     "Gallery.Table.uploaded": "Uploaded",
